@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/nav';
+import SearchPost from '@/components/search';
+import Footer from '@/components/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +21,12 @@ export default function RootLayout({
       <html lang='en'>
          <body className={inter.className}>
             <Nav />
-            <main className='p-3 max-w-5xl mx-auto'>{children}</main>
+            {/* mobile search */}
+            <main className='p-3 max-w-5xl mx-auto mt-16 md:mt-20 min-h-screen'>
+               <SearchPost isMobile={true} />
+               {children}
+            </main>
+            <Footer />
          </body>
       </html>
    );
