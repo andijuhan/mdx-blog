@@ -12,3 +12,18 @@ export const menus = [
       path: '/contact',
    },
 ];
+
+export const categories = [
+   {
+      name: 'javascript',
+      path: '/',
+   },
+   {
+      name: 'nextjs',
+      path: '/',
+   },
+   {
+      name: 'tailwind',
+      path: '/',
+   },
+];
