@@ -30,5 +30,5 @@ export const categories = [
 
 export const blogSetting = {
    title: 'JUHANCOD',
-   description: 'My blog',
+   description: 'Suka ngoding sambil ngopi.',
 };

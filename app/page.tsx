@@ -23,10 +23,20 @@ const getPosts = async (): Promise<IPost[]> => {
 
 export default async function Home() {
    const posts = await getPosts();
+   // Fungsi pembanding untuk mengurutkan berdasarkan tanggal
+   const compareDates = (a: IPost, b: IPost) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+
+      return dateB.getTime() - dateA.getTime();
+   };
+
+   // Mengurutkan array berdasarkan tanggal secara ascending
+   const sortedPostByDate = posts.sort(compareDates);
 
    return (
       <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
-         {posts.map((post, index) => (
+         {sortedPostByDate.map((post, index) => (
             <Link key={index} href={`/${post.slug}`} passHref>
                <div className='flex flex-col group rounded-md border overflow-hidden bg-white'>
                   <div className='h-[300px]'>

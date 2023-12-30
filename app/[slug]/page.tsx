@@ -7,6 +7,22 @@ import { IPost } from '@/types';
 import PostContent from '@/components/post-content';
 import Image from 'next/image';
 import Link from 'next/link';
+import { blogSetting } from '@/data';
+
+export async function generateMetadata({
+   params,
+}: {
+   params: { slug: string };
+}) {
+   // read route params then fetch data
+   const { data } = await getContent(params.slug);
+
+   // return an object
+   return {
+      title: data.title + ' | ' + blogSetting.title,
+      description: data.description,
+   };
+}
 
 const getContent = async (
    slug: string
