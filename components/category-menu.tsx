@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const CategoryMenu = () => {
    return (
-      <div className='flex gap-2 flex-wrap mb-3'>
+      <div className='flex gap-2 flex-wrap mb-3 border-b pb-3'>
          {categories.map((category, index) => (
             <Link
                href={`/tag/${category.name}`}

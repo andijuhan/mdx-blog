@@ -1,9 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import Link from 'next/link';
-import Image from 'next/image';
 import { IPost } from '@/types';
+import PostCard from '@/components/post-card';
 
 const getPosts = async (): Promise<IPost[]> => {
    const files = fs.readdirSync(path.join('posts'));
@@ -37,25 +36,7 @@ export default async function Home() {
    return (
       <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
          {sortedPostByDate.map((post, index) => (
-            <Link key={index} href={`/${post.slug}`} passHref>
-               <div className='flex flex-col group rounded-md border overflow-hidden bg-white'>
-                  <div className='h-[300px]'>
-                     <Image
-                        src={post.thumbnailUrl}
-                        width={500}
-                        height={500}
-                        alt={post.title}
-                        className='w-full h-full object-cover object-center group-hover:brightness-90 transition-all duration-300'
-                     />
-                  </div>
-                  <div className='flex flex-col gap-2 p-3 max-w-[700px]'>
-                     <h2 className='text-xl font-semibold tracking-tight group-hover:text-indigo-500 transition-colors duration-300'>
-                        {post.title}
-                     </h2>
-                     <span className='text-gray-700'>{post.date}</span>
-                  </div>
-               </div>
-            </Link>
+            <PostCard post={post} key={index} />
          ))}
       </div>
    );
