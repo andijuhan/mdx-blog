@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
    return (
       <html lang='en'>
-         <body>
+         <body className='bg-gray-50'>
             <Nav />
             {/* mobile search */}
             <main className='p-3 max-w-4xl mx-auto mt-16 md:mt-20 min-h-screen'>

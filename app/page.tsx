@@ -3,15 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import Image from 'next/image';
-
-interface IPost {
-   title: string;
-   slug: string;
-   date: string;
-   description: string;
-   thumbnailUrl: string;
-   tags: string[];
-}
+import { IPost } from '@/types';
 
 const getPosts = async (): Promise<IPost[]> => {
    const files = fs.readdirSync(path.join('posts'));
@@ -35,8 +27,8 @@ export default async function Home() {
    return (
       <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
          {posts.map((post, index) => (
-            <Link key={index} href={`/post/${post.slug}`} passHref>
-               <div className='flex flex-col group rounded-md border overflow-hidden bg-gray-50'>
+            <Link key={index} href={`/${post.slug}`} passHref>
+               <div className='flex flex-col group rounded-md border overflow-hidden bg-white'>
                   <div className='h-[300px]'>
                      <Image
                         src={post.thumbnailUrl}

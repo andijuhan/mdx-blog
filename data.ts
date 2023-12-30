@@ -27,3 +27,8 @@ export const categories = [
       path: '/',
    },
 ];
+
+export const blogSetting = {
+   title: 'JUHANCOD',
+   description: 'My blog',
+};

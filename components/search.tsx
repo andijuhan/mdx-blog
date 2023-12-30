@@ -23,7 +23,7 @@ const SearchPost = ({ isMobile }: ISearchPost) => {
             />
             <Search
                size={30}
-               className='cursor-pointer opacity-50 -ml-[40px]'
+               className='cursor-pointer opacity-30 -ml-[40px]'
             />
          </form>
       </div>
