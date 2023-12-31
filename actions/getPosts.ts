@@ -40,8 +40,7 @@ const getPosts = async ({
    // Mengurutkan array berdasarkan tanggal secara ascending
    let sortedPostByDate = posts.sort(compareDates);
 
-   //filter post by title
-
+   //search post by title
    if (searchKeyword) {
       const postByTitle = sortedPostByDate.filter((post: IPost) => {
          return post.title.toLowerCase().includes(searchKeyword.toLowerCase());
@@ -50,7 +49,6 @@ const getPosts = async ({
    }
 
    //filter post by category
-
    if (tag) {
       const postByTag = sortedPostByDate.filter((post: IPost) => {
          return post.tags.includes(tag);

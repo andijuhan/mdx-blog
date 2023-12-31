@@ -6,10 +6,10 @@ import { notFound } from 'next/navigation';
 export async function generateMetadata({
    params,
 }: {
-   params: { tagName: string };
+   params: { searchKeyword: string };
 }) {
    return {
-      title: `Posts about ${params.tagName}` + ' | ' + blogSetting.title,
+      title: `You search ${params.searchKeyword}` + ' | ' + blogSetting.title,
       description: '',
    };
 }
@@ -17,17 +17,22 @@ export async function generateMetadata({
 export default async function page({
    params,
 }: {
-   params: { tagName: string };
+   params: { searchKeyword: string };
 }) {
    const { posts } = await getPosts({
       page: 1,
       pageSize: 6,
-      tag: params.tagName,
+      searchKeyword: params.searchKeyword,
    });
 
    if (posts.length === 0) {
       return notFound();
    }
 
-   return <InfinityScrollPost initialPost={posts} tag={params.tagName} />;
+   return (
+      <InfinityScrollPost
+         initialPost={posts}
+         searchKeyword={params.searchKeyword}
+      />
+   );
 }

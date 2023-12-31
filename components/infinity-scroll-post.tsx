@@ -9,9 +9,14 @@ import getPosts from '@/actions/getPosts';
 interface IInfinityScrollPostProps {
    initialPost: IPost[];
    tag?: string;
+   searchKeyword?: string;
 }
 
-const InfinityScrollPost = ({ initialPost, tag }: IInfinityScrollPostProps) => {
+const InfinityScrollPost = ({
+   initialPost,
+   tag,
+   searchKeyword,
+}: IInfinityScrollPostProps) => {
    const [posts, setPosts] = useState(initialPost);
    const [page, setPage] = useState(1);
    const [ref, inView] = useInView();
@@ -20,12 +25,17 @@ const InfinityScrollPost = ({ initialPost, tag }: IInfinityScrollPostProps) => {
    const loadMorePost = async () => {
       setIsLoading(true);
       const next = page + 1;
-      const { posts } = await getPosts({ page: next, pageSize: 6, tag: tag });
+      const { posts } = await getPosts({
+         page: next,
+         pageSize: 6,
+         tag,
+         searchKeyword,
+      });
 
       if (posts?.length) {
          setTimeout(() => {
-            setIsLoading(false);
             setPage(next);
+            setIsLoading(false);
             setPosts((prev: IPost[]) => [...prev, ...posts]);
          }, 500);
       } else {
@@ -52,7 +62,7 @@ const InfinityScrollPost = ({ initialPost, tag }: IInfinityScrollPostProps) => {
             className='col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4'
             ref={ref}
          >
-            {isLoading && (
+            {isLoading && posts.length >= 6 && (
                <svg
                   aria-hidden='true'
                   className='h-10 w-10 animate-spin fill-sky-600 text-gray-200 dark:text-gray-600'

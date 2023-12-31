@@ -8,7 +8,7 @@ const Nav = () => {
          <div className='flex items-center py-4 px-3 max-w-4xl mx-auto '>
             <Link href={'/'} passHref>
                <h1 className='text-2xl text-indigo-400 font-bold mr-10 tracking-tighter'>
-                  {blogSetting.title}
+                  👨🏻‍💻{blogSetting.title}
                </h1>
             </Link>
             {/* menu */}

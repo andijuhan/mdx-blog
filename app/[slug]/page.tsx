@@ -66,7 +66,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
          <h1 className='text-3xl font-bold mb-3'>{data.title}</h1>
          <div className='mb-4 flex gap-4 border-b pb-2'>
             <div>
-               <span>{data.date}</span>
+               <span className='text-gray-500'>{data.date}</span>
             </div>
             <div>
                {data.tags.map((tag, index) => (

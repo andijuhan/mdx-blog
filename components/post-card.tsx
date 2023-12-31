@@ -16,7 +16,8 @@ const PostCard = ({ post }: IPostCard) => {
                   width={500}
                   height={500}
                   alt={post.title}
-                  className='w-full h-full object-cover object-center group-hover:brightness-90 transition-all duration-300 border-b'
+                  className='w-full h-full object-cover object-center group-hover:brightness-90 transition-all blur duration-[2s] border-b'
+                  onLoadingComplete={(image) => image.classList.remove('blur')}
                />
             </div>
             <div className='flex flex-col gap-2 p-3 max-w-[700px]'>
