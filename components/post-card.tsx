@@ -16,7 +16,7 @@ const PostCard = ({ post }: IPostCard) => {
                   width={500}
                   height={500}
                   alt={post.title}
-                  className='w-full h-full object-cover object-center group-hover:brightness-90 transition-all duration-300'
+                  className='w-full h-full object-cover object-center group-hover:brightness-90 transition-all duration-300 border-b'
                />
             </div>
             <div className='flex flex-col gap-2 p-3 max-w-[700px]'>

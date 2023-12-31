@@ -29,6 +29,6 @@ export const categories = [
 ];
 
 export const blogSetting = {
-   title: 'JUHANCOD',
+   title: 'JUHAN COD',
    description: 'Suka ngoding sambil ngopi.',
 };

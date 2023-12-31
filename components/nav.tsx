@@ -4,10 +4,10 @@ import SearchPost from './search';
 
 const Nav = () => {
    return (
-      <nav className='fixed top-0 left-0 w-full z-50 bg-black'>
+      <nav className='fixed top-0 left-0 w-full z-50 bg-black shadow-lg'>
          <div className='flex items-center py-4 px-3 max-w-4xl mx-auto '>
             <Link href={'/'} passHref>
-               <h1 className='text-2xl text-indigo-400 font-bold md:font-black mr-10 tracking-tighter'>
+               <h1 className='text-2xl text-indigo-400 font-bold mr-10 tracking-tighter'>
                   {blogSetting.title}
                </h1>
             </Link>
