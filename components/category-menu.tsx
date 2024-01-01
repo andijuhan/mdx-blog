@@ -13,7 +13,7 @@ const CategoryMenu = () => {
                href={`/tag/${category.name}`}
                className={`${
                   path.includes(category.name) && 'border-gray-800'
-               } py-1 px-3 rounded-md border dark:border-gray-700 bg-white dark:bg-gray-600 hover:border-gray-800 transition-colors duration-300 text-black dark:text-gray-100`}
+               } py-1 px-3 rounded-md border dark:border-gray-700 bg-white dark:bg-gray-600 min-w-max hover:border-gray-800 transition-colors duration-300 text-black dark:text-gray-100`}
                key={index}
             >
                #{category.name}

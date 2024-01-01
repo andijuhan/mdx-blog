@@ -28,12 +28,8 @@ const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
             props.className
          )}
       >
-         {theme === 'dark' && (
-            <Moon size={30} onClick={() => setTheme('light')} />
-         )}
-         {theme === 'light' && (
-            <Sun size={30} onClick={() => setTheme('dark')} />
-         )}
+         {theme === 'dark' && <Moon onClick={() => setTheme('light')} />}
+         {theme === 'light' && <Sun onClick={() => setTheme('dark')} />}
       </button>
    );
 };
