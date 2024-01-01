@@ -71,7 +71,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
             <div>
                {data.tags.map((tag, index) => (
                   <Link href={`/tag/${tag}`} key={index} passHref>
-                     <span className='text-indigo-500 hover:text-indigo-700 mr-2'>
+                     <span className='text-indigo-500 dark:text-indigo-400 hover:text-indigo-700 mr-2'>
                         #{tag}
                      </span>
                   </Link>

@@ -1,9 +1,12 @@
 'use client';
 import { Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { HTMLAttributes, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
+import { twMerge } from 'tailwind-merge';
 
-const DarkModeSwitcher = () => {
+interface DarkModeSwitcherProps extends HTMLAttributes<HTMLButtonElement> {}
+
+const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
    const [isDarkMode, setIsDarkMode] = useState(false);
    const { theme, setTheme } = useTheme();
    const [isMounted, setIsMounted] = useState(false);
@@ -18,8 +21,12 @@ const DarkModeSwitcher = () => {
 
    return (
       <button
+         {...props}
          onClick={() => setIsDarkMode(!isDarkMode)}
-         className='hidden md:block text-white opacity-80 hover:opacity-95 transition-colors duration-300 ml-5'
+         className={twMerge(
+            'text-white opacity-80 hover:opacity-95 transition-colors duration-300',
+            props.className
+         )}
       >
          {theme === 'dark' && (
             <Moon size={30} onClick={() => setTheme('light')} />

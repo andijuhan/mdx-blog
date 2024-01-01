@@ -20,7 +20,7 @@ const PostContent = ({ mdxSource }: IPostContent) => {
    }, []);
 
    return (
-      <div className='content'>
+      <div className='content tracking-wide dark:text-gray-200'>
          <MDXRemote {...mdxSource} components={components} />
       </div>
    );

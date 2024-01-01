@@ -14,6 +14,7 @@ const SearchPost = ({ isMobile }: ISearchPost) => {
    const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (!keyword) return;
       if (e.key === 'Enter') {
+         setKeyword('');
          router.push(`/search/${keyword}`);
       }
    };

@@ -26,6 +26,18 @@ export const categories = [
       name: 'tailwind',
       path: '/',
    },
+   {
+      name: 'typescript',
+      path: '/',
+   },
+   {
+      name: 'express',
+      path: '/',
+   },
+   {
+      name: 'framer motion',
+      path: '/',
+   },
 ];
 
 export const blogSetting = {

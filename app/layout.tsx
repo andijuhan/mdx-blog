@@ -6,6 +6,7 @@ import Footer from '@/components/footer';
 import CategoryMenu from '@/components/category-menu';
 import { blogSetting } from '@/data';
 import { ThemeProvider } from '@/providers/theme-provider';
+import Sidebar from '@/components/sidebar';
 
 export const metadata: Metadata = {
    title: blogSetting.title + ' | ' + blogSetting.description,
@@ -29,6 +30,7 @@ export default function RootLayout({
                   {children}
                </main>
                <Footer />
+               <Sidebar />
             </ThemeProvider>
          </body>
       </html>
