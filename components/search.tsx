@@ -28,7 +28,7 @@ const SearchPost = ({ isMobile }: ISearchPost) => {
       >
          <div className='w-full flex items-center'>
             <input
-               className='border p-2 rounded-md w-full outline-none pr-[40px]'
+               className='border dark:border-gray-700 p-2 rounded-md w-full outline-none pr-[40px]'
                type='search'
                placeholder='Search Posts'
                value={keyword}

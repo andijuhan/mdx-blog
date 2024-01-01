@@ -1,6 +1,7 @@
 import { menus, blogSetting } from '@/data';
 import Link from 'next/link';
 import SearchPost from './search';
+import DarkModeSwitcher from './dark-mode-switcher';
 
 const Nav = () => {
    return (
@@ -15,13 +16,15 @@ const Nav = () => {
             <div className='hidden lg:flex gap-7 items-center'>
                {menus.map((menu, index) => (
                   <Link href={menu.path} key={index} passHref>
-                     <span className='text-gray-100 hover:text-indigo-300 font-medium'>
+                     <span className='text-gray-100 dark:text-gray-300 hover:text-indigo-300 font-medium'>
                         {menu.title}
                      </span>
                   </Link>
                ))}
             </div>
+
             <SearchPost isMobile={false} />
+            <DarkModeSwitcher />
          </div>
       </nav>
    );

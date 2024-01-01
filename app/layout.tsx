@@ -5,6 +5,7 @@ import SearchPost from '@/components/search';
 import Footer from '@/components/footer';
 import CategoryMenu from '@/components/category-menu';
 import { blogSetting } from '@/data';
+import { ThemeProvider } from '@/providers/theme-provider';
 
 export const metadata: Metadata = {
    title: blogSetting.title + ' | ' + blogSetting.description,
@@ -18,15 +19,17 @@ export default function RootLayout({
 }) {
    return (
       <html lang='en'>
-         <body className='bg-gray-100'>
-            <Nav />
-            {/* mobile search */}
-            <main className='p-3 max-w-4xl mx-auto mt-16 md:mt-20 min-h-screen'>
-               <SearchPost isMobile={true} />
-               <CategoryMenu />
-               {children}
-            </main>
-            <Footer />
+         <body className='bg-gray-100 dark:bg-gray-800'>
+            <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+               <Nav />
+               {/* mobile search */}
+               <main className='p-3 max-w-4xl mx-auto mt-16 md:mt-20 min-h-screen'>
+                  <SearchPost isMobile={true} />
+                  <CategoryMenu />
+                  {children}
+               </main>
+               <Footer />
+            </ThemeProvider>
          </body>
       </html>
    );
