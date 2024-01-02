@@ -15,15 +15,17 @@ const Sidebar = () => {
    }, [pathName]);
 
    return (
-      <div
-         className={`${
-            !isOpen && 'opacity-0 w-0 h-0'
-         } fixed inset-0 top-[60px] md:hidden max-h-screen z-[50] bg-black/50 backdrop-blur-sm transition-all duration-500`}
-      >
+      <>
+         <div
+            className={`${
+               !isOpen && 'opacity-0 w-0 h-0'
+            } fixed inset-0 top-[60px] md:hidden max-h-screen z-[50] bg-black/50 backdrop-blur-sm transition-all duration-500`}
+            onClick={() => close()}
+         ></div>
          <div
             className={`${
                !isOpen && 'transform -translate-x-full'
-            } w-[256px] max-w-[256px] px-7 h-screen overflow-hidden bg-black transition-all duration-300 opacity-100`}
+            } fixed inset-0 top-[60px] z-[51] w-[256px] max-w-[256px] px-7 h-screen overflow-hidden bg-black transition-all duration-300 opacity-100`}
          >
             <DarkModeSwitcher className='my-7' />
             <div className='flex flex-col gap-5'>
@@ -36,7 +38,7 @@ const Sidebar = () => {
                ))}
             </div>
          </div>
-      </div>
+      </>
    );
 };
 
