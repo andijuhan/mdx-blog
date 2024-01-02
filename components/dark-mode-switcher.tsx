@@ -24,7 +24,7 @@ const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
          {...props}
          onClick={() => setIsDarkMode(!isDarkMode)}
          className={twMerge(
-            'text-white opacity-80 hover:opacity-95 transition-colors duration-300',
+            'text-white opacity-60 hover:opacity-95 transition-colors duration-300',
             props.className
          )}
       >

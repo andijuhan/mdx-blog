@@ -8,6 +8,7 @@ import PostContent from '@/components/post-content';
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogSetting } from '@/data';
+import FeaturedImagePost from '@/components/featured-image-post';
 
 export async function generateMetadata({
    params,
@@ -56,13 +57,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
    return (
       <div>
-         <Image
-            src={data.thumbnailUrl}
-            alt={data.title}
-            width={800}
-            height={500}
-            className='w-full h-[200px] sm:h-[400px] object-cover object-center rounded mb-3 border dark:border-gray-700'
-         />
+         <FeaturedImagePost data={data} />
          <h1 className='text-3xl font-bold mb-3'>{data.title}</h1>
          <div className='mb-4 flex gap-4 border-b dark:border-b-gray-700 pb-2'>
             <div>
