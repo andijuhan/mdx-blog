@@ -7,6 +7,7 @@ import CategoryMenu from '@/components/category-menu';
 import { blogSetting } from '@/data';
 import { ThemeProvider } from '@/providers/theme-provider';
 import Sidebar from '@/components/sidebar';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
    title: blogSetting.title + ' | ' + blogSetting.description,
