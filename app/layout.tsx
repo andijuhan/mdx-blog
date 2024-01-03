@@ -21,7 +21,7 @@ export default function RootLayout({
    return (
       <html lang='en'>
          <body className='bg-gray-100 dark:bg-gray-800'>
-            <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <ThemeProvider attribute='class' defaultTheme='light'>
                <Nav />
                {/* mobile search */}
                <main className='p-3 max-w-4xl mx-auto mt-16 md:mt-20 min-h-screen'>
