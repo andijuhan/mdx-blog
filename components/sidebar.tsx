@@ -28,9 +28,14 @@ const Sidebar = () => {
             } fixed inset-0 top-[60px] z-[51] w-[256px] max-w-[256px] px-7 h-screen overflow-hidden bg-black transition-all duration-300 opacity-100`}
          >
             <DarkModeSwitcher className='my-7' />
-            <div className='flex flex-col gap-5'>
+            <div className='flex flex-col gap-5 w-full'>
                {menus.map((menu, index) => (
-                  <Link href={menu.path} key={index} passHref>
+                  <Link
+                     href={menu.path}
+                     key={index}
+                     passHref
+                     className='border-b border-gray-900 pb-2 w-full'
+                  >
                      <span className='text-gray-100 dark:text-gray-300 hover:text-indigo-300 font-medium'>
                         {menu.title}
                      </span>
