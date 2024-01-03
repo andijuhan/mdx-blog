@@ -13,14 +13,14 @@ const loading = () => {
             <div className='w-20 h-7 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
          </div>
          <div className='flex flex-col gap-3'>
-            <div className='w-full h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
 
-            <div className='w-1/2 h-screen sm:h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
+            <div className='w-1/2 h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
          </div>
       </div>
    );
