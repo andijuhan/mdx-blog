@@ -5,7 +5,6 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { notFound } from 'next/navigation';
 import { IPost } from '@/types';
 import PostContent from '@/components/post-content';
-import Image from 'next/image';
 import Link from 'next/link';
 import { blogSetting } from '@/data';
 import FeaturedImagePost from '@/components/featured-image-post';
@@ -45,7 +44,7 @@ const getContent = async (
          thumbnailUrl: data.thumbnailUrl || '',
          tags: data.tags || [],
       };
-
+      //await new Promise((resolve) => setTimeout(resolve, 5000));
       return { data: postData, mdxSource };
    } catch (error) {
       return notFound();
