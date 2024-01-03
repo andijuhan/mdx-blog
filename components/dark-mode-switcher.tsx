@@ -1,5 +1,5 @@
 'use client';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, Menu } from 'lucide-react';
 import { HTMLAttributes, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { twMerge } from 'tailwind-merge';
@@ -11,13 +11,13 @@ const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
    const { theme, setTheme } = useTheme();
    const [isMounted, setIsMounted] = useState(false);
 
-   // useEffect(() => {
-   //    setIsMounted(true);
-   // }, []);
+   useEffect(() => {
+      setIsMounted(true);
+   }, []);
 
-   // if (!isMounted) {
-   //    return null;
-   // }
+   if (!isMounted) {
+      return null;
+   }
 
    return (
       <button
@@ -28,8 +28,8 @@ const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
             props.className
          )}
       >
-         {theme === 'dark' && <Moon onClick={() => setTheme('light')} />}
-         {theme === 'light' && <Sun onClick={() => setTheme('dark')} />}
+         {theme === 'dark' && <Menu onClick={() => setTheme('light')} />}
+         {theme === 'light' && <Menu onClick={() => setTheme('dark')} />}
       </button>
    );
 };
