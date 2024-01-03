@@ -17,10 +17,12 @@ const getPosts = async ({
    searchKeyword,
    tag,
 }: IGetPosts): Promise<{ posts: IPost[]; totalCount: number }> => {
-   const files = fs.readdirSync(path.join('posts'));
+   const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
 
    const posts = files.map((fileName) => {
-      const markdownMeta = fs.readFileSync(path.join('posts', fileName));
+      const markdownMeta = fs.readFileSync(
+         path.join(process.cwd(), 'posts', fileName)
+      );
 
       const { data } = matter(markdownMeta);
 
