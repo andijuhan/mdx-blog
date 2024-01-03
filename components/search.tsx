@@ -24,7 +24,7 @@ const SearchPost = ({ isMobile }: ISearchPost) => {
          className={`${
             isMobile
                ? 'flex md:hidden mb-3'
-               : 'hidden md:flex md:w-[320px] ml-auto'
+               : 'hidden md:flex md:w-[280px] ml-auto'
          }  gap-3 items-center`}
       >
          <div className='w-full flex items-center'>
