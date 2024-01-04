@@ -64,7 +64,7 @@ const getPosts = async ({
 
    const postsLimited = sortedPostByDate.slice(startIndex, endIndex); // Mengambil Limited
 
-   await new Promise((resolve) => setTimeout(resolve, 500));
+   //await new Promise((resolve) => setTimeout(resolve, 500));
    return { posts: postsLimited, totalCount };
 };
 
