@@ -1,5 +1,4 @@
 import SkeletonPostCard from '@/components/skeleton-post-card';
-import React from 'react';
 
 const Loading = () => {
    return (
