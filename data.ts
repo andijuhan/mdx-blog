@@ -35,7 +35,7 @@ export const categories = [
       path: '/',
    },
    {
-      name: 'framer motion',
+      name: 'framer-motion',
       path: '/',
    },
 ];
