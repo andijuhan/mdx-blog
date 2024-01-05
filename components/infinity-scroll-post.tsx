@@ -52,7 +52,7 @@ const InfinityScrollPost = ({
    }, [inView]);
 
    return (
-      <>
+      <section>
          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7'>
             {posts.map((post, index) => (
                <PostCard post={post} key={index} />
@@ -82,7 +82,7 @@ const InfinityScrollPost = ({
             )}
             <span className='sr-only'>Loading...</span>
          </div>
-      </>
+      </section>
    );
 };
 

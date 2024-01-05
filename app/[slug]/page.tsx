@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
    const { data, mdxSource } = await getContent(params.slug);
 
    return (
-      <div className='w-full'>
+      <article className='w-full'>
          <FeaturedImagePost data={data} />
          <h1 className='text-2xl font-bold mb-3'>{data.title}</h1>
          <div className='mb-4 w-full flex overflow-x-scroll scrollbar-thin gap-4 border-b dark:border-b-gray-700 pb-2'>
@@ -42,7 +42,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
             </div>
          </div>
          <PostContent mdxSource={mdxSource} />
-      </div>
+      </article>
    );
 };
 

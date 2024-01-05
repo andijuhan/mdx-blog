@@ -7,7 +7,6 @@ import CategoryMenu from '@/components/category-menu';
 import { blogSetting } from '@/data';
 import { ThemeProvider } from '@/providers/theme-provider';
 import Sidebar from '@/components/sidebar';
-import { Suspense } from 'react';
 
 export const metadata: Metadata = {
    title: blogSetting.title + ' | ' + blogSetting.description,
@@ -23,7 +22,10 @@ export default function RootLayout({
       <html lang='en'>
          <body className='bg-gray-100 dark:bg-gray-800'>
             <ThemeProvider attribute='class' defaultTheme='light'>
-               <Nav />
+               <header>
+                  <Nav />
+               </header>
+
                {/* mobile search */}
                <main className='p-3 max-w-4xl mx-auto mt-16 md:mt-20 min-h-screen'>
                   <SearchPost isMobile={true} />

@@ -15,7 +15,7 @@ const Sidebar = () => {
    }, [pathName]);
 
    return (
-      <>
+      <aside>
          <div
             className={`${
                !isOpen && 'opacity-0 w-0 h-0'
@@ -43,7 +43,7 @@ const Sidebar = () => {
                ))}
             </div>
          </div>
-      </>
+      </aside>
    );
 };
 
