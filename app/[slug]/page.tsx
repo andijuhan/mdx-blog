@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
    const { data, mdxSource } = await getContent(params.slug);
 
    return (
-      <article className='w-full rounded shadow-lg p-3 bg-gray-50 dark:bg-gray-700'>
+      <article className='w-full rounded shadow-lg p-2 md:p-5 bg-gray-50 dark:bg-gray-700'>
          <FeaturedImagePost data={data} />
          <h1 className='text-2xl font-bold mb-3'>{data.title}</h1>
          <div className='mb-4 w-full flex overflow-x-scroll scrollbar-thin gap-4 border-b dark:border-b-gray-700 pb-2'>

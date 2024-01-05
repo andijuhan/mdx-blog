@@ -5,3 +5,65 @@ description: Cara membuat costumable component nextjs tailwind.
 thumbnailUrl: '/images/costumable-component.jpg'
 tags: ['tailwind', 'nextjs', 'typescript']
 ---
+
+Membuat costumable component atau komponen yang bisa di kostumisasi secara fleksibel seringkali sangat dibutuhkan pada proyek kita. Pada tulisan kali ini Saya akan berbagi trik pembuatan komponen nextjs yang mungkin nantinya bisa bermanfaat.
+
+Lagi-lagi pengguna tailwind mendapatkan berbagai kemudahan dalam proses pengembangan karena kali ini Saya akan memanfaatkan liblary bernama tailwind-merge. Liblary ini sangat bermanfaat untuk menghindari terjadinya konflik pada class tailwind, yaitu pada class di komponen dan class yang berasal dari props.
+
+Silahkan install liblary tailwind-merge dengan perintah berikut :
+
+```npm
+npm i tailwind-merge
+```
+
+Ini adalah contoh costumable component bernama my-button.tsx.
+
+```javascript
+'use client';
+import { HTMLAttributes } from 'react';
+import { twMerge } from 'tailwind-merge';
+
+interface DarkModeSwitcherProps extends HTMLAttributes<HTMLButtonElement> {
+   children: React.ReactNode;
+}
+
+const MyButton = ({ children, ...props }: DarkModeSwitcherProps) => {
+   return (
+      <button
+         {...props}
+         className={twMerge(
+            'flex items-center font-semibold bg-blue-500 text-white rounded-lg px-4 py-2',
+            props.className
+         )}
+      >
+         {children}
+      </button>
+   );
+};
+
+export default MyButton;
+```
+
+Pertama kita buat interface `DarkModeSwitcherProps` yang mengekstensi `HTMLAttributes<HTMLButtonElement>` dengan tambahan properti children. Selanjutnya pada elemen button kita menggunakan `{...props}` untuk menyalin semua property yang diterima oleh `MyButton`, kemudian fungsi `twMerge` akan menggabungkian class bawaan komponen dengan class dari props.
+
+Setelah itu kita bisa menggunakan komponen `MyButton` sesuai kebutuhan dan tentu sajah kita dapat menambahkan style tailwind pada props className.
+
+```javascript
+<MyButton className='bg-violet-600 font-bold'>Text Button</MyButton>
+```
+
+Jika Anda perhatikan, komponen `MyButton` memiliki style class tailwind bawaan seperti berikut :
+
+```html
+font-semibold bg-blue-500
+```
+
+Saat komponen `MyButton` digunakan, kedua kelas tersebut di merge / digabungkan dengan class :
+
+```html
+bg-violet-600 font-bold
+```
+
+Jika kita tidak menggunakan twMerge maka akan terjadi konflik class tailwind. Dengan membuat costumable component seperti ini, kita akan lebih bebas / fleksibel dalam menkostumisasi tampilan komponen tersebut karena tinggal menambah class tailwind sesuai keinginan kita.
+
+Untuk mempelajari liblary twMerge lebih dalam, silahkan kunjungi [npmjs](https://www.npmjs.com/package/tailwind-merge).

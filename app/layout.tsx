@@ -25,13 +25,13 @@ export default function RootLayout({
                <header>
                   <Nav />
                </header>
-
                {/* mobile search */}
                <main className='p-3 max-w-4xl mx-auto mt-16 md:mt-20 min-h-screen'>
                   <SearchPost isMobile={true} />
                   <CategoryMenu />
                   {children}
                </main>
+
                <Footer />
                <Sidebar />
             </ThemeProvider>

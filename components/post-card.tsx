@@ -14,7 +14,7 @@ const PostCard = ({ post }: IPostCard) => {
    return (
       <Link href={`/${post.slug}`} passHref>
          <div className='flex flex-col group rounded-md border dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-700'>
-            <div className='h-[300px] md:h-[250px] lg:h-[200px] w-full overflow-hidden px-3 pt-3 rounded'>
+            <div className='h-[300px] md:h-[250px] lg:h-[200px] w-full overflow-hidden'>
                <Image
                   src={post.thumbnailUrl}
                   width={300}
