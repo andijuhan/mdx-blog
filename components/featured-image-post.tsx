@@ -18,8 +18,8 @@ const FeaturedImagePost = ({ data }: FeaturedImagePostProps) => {
             alt={data.title}
             width={800}
             height={500}
-            className={`w-full h-[200px] sm:h-[400px] object-cover object-center transition-all duration-500 ${
-               isImageReady ? 'blur-0' : 'blur-md'
+            className={`w-full h-[200px] sm:h-[400px] object-cover object-center transition-all duration-[2s] ${
+               isImageReady ? 'blur-0' : 'blur-3xl'
             }`}
             onLoad={() => setIsImageReady(true)}
          />
