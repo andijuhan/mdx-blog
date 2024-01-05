@@ -64,6 +64,8 @@ export default function RootLayout({
 }
 ```
 
+Pada komponen ThemeProvider tersebut admin menggunakan nilai props attribute='class' untuk menyesuaikan dengan tailwind.config.js. Kemudian untuk nilai props defaultTheme dapat memilih dark, atau light.
+
 Terakhir kita tinggal panggil hook useTheme dan menerapkannya pada logic program.
 
 ```javascript
@@ -95,4 +97,4 @@ const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
 export default DarkModeSwitcher;
 ```
 
-Mudah bukan.. Semoga tulisan ini bisa bermanfaat.
+Mudah bukan.. Semoga tulisan ini bisa bermanfaat. Untuk mempelajari liblary next-theme lebih lanjut silahkan kunjungi [npmjs](https://www.npmjs.com/package/next-themes).
