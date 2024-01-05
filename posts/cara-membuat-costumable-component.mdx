@@ -23,11 +23,11 @@ Ini adalah contoh costumable component bernama my-button.tsx.
 import { HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface DarkModeSwitcherProps extends HTMLAttributes<HTMLButtonElement> {
+interface MyButtonProps extends HTMLAttributes<HTMLButtonElement> {
    children: React.ReactNode;
 }
 
-const MyButton = ({ children, ...props }: DarkModeSwitcherProps) => {
+const MyButton = ({ children, ...props }: MyButtonProps) => {
    return (
       <button
          {...props}
@@ -44,7 +44,7 @@ const MyButton = ({ children, ...props }: DarkModeSwitcherProps) => {
 export default MyButton;
 ```
 
-Pertama kita buat interface `DarkModeSwitcherProps` yang mengekstensi `HTMLAttributes<HTMLButtonElement>` dengan tambahan properti children. Selanjutnya pada elemen button kita menggunakan `{...props}` untuk menyalin semua property yang diterima oleh `MyButton`, kemudian fungsi `twMerge` akan menggabungkian class bawaan komponen dengan class dari props.
+Pertama kita buat interface `MyButtonProps` yang mengekstensi `HTMLAttributes<HTMLButtonElement>` dengan tambahan properti children. Selanjutnya pada elemen button kita menggunakan `{...props}` untuk menyalin semua property yang diterima oleh `MyButton`, kemudian fungsi `twMerge` akan menggabungkian class bawaan komponen dengan class dari props.
 
 Setelah itu kita bisa menggunakan komponen `MyButton` sesuai kebutuhan dan tentu sajah kita dapat menambahkan style tailwind pada props className.
 
