@@ -1,5 +1,5 @@
 ---
-title: Cara setup prisma mysql nextjs typeScript
+title: Cara setup prisma mysql nextjs typescript
 date: 'january 6, 2024'
 description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 thumbnailUrl: '/images/cara-setup-prisma.jpg'
@@ -8,7 +8,7 @@ tags: ['prisma', 'nextjs']
 
 Prisma adalah sebuah framework ORM (Object-Relational Mapping) untuk Node.js dan TypeScript yang menyediakan cara yang efisien dan deklaratif untuk berinteraksi dengan database. Dibangun di atas TypeScript, Prisma menghasilkan client database secara otomatis dari skema database yang didefinisikan, memungkinkan pengembang untuk melakukan operasi CRUD (Create, Read, Update, Delete) dengan sintaks yang jelas dan intuitif. Prisma menawarkan dukungan untuk berbagai database, termasuk PostgreSQL, MySQL, SQLite, dan SQL Server, serta menyediakan fitur-fitur seperti pengelolaan relasi, query bersarang, dan migrasi database. Prisma memanfaatkan teknologi generasi kode dan menyediakan pengalaman pengembangan yang nyaman dan aman dengan penanganan query yang statis, autentikasi dan otorisasi yang terintegrasi, dan kemampuan untuk mengelola skema database dengan mudah.
 
-Admin sendiri selalu menggunakan prisma untuk proyek-proyek nextjs karena sangat mudah. Namun admin kadang suka lupa cara setupnya, untuk itu disini admin membuat post Cara mudah setup prisma di nextjs dan typeScript untuk memudahkan proses setup supaya gak searching sana sini lagi.
+Admin sendiri selalu menggunakan prisma untuk proyek-proyek nextjs karena sangat mudah. Namun admin kadang suka lupa cara setupnya, untuk itu disini admin membuat post Cara mudah setup prisma di nextjs dan typescript untuk memudahkan proses setup supaya gak searching sana sini lagi.
 
 Instal dulu liblary prisma dengan perintah berikut :
 
@@ -91,7 +91,7 @@ if (process.env.NODE_ENV !== 'production') globalThis.prisma = prismadb;
 export default prismadb;
 ```
 
-Akhirnya Kita sudah bisa melakukan CRUD. Berikut ini contoh fetch data dari tabel post.
+Akhirnya Kita sudah bisa melakukan proses CRUD. Berikut ini contoh fetch data dari tabel post.
 
 ```javascript
 import prismadb from '@/lib/prisma';

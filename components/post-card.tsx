@@ -28,7 +28,7 @@ const PostCard = ({ post }: IPostCard) => {
                />
             </div>
             <div className='flex flex-col gap-2 p-3 max-w-[700px]'>
-               <h2 className='text-xl md:text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-200 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors duration-300 line-clamp-2'>
+               <h2 className='text-xl md:text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-200 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors duration-300 line-clamp-2 capitalize'>
                   {post.title}
                </h2>
                <span className='text-gray-700 dark:text-gray-300'>
