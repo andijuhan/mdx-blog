@@ -59,6 +59,7 @@ export default Button;
 
 Supaya kode lebih bersih, saya pisahkan bagian class tailwind menjadi dua, yaitu baseClass yang bersisi class button default, dan whichVarian berisi objek dengan dua buah key property.
 Key property tersebut merupakan class tailwind dengan value sesuai kondisi variant (true / false). Gunakan baseClass, whichVarian, dan props.className sebagai argumen fungsi cn.
+
 Sebelumnya kita buat dulu fungsi cn di file utils.ts pada folder lib.
 
 ```javascript
@@ -70,16 +71,10 @@ export const cn = (...inputs: ClassValue[]) => {
 };
 ```
 
-Props dari fungsi cn yaitu rest parameter input akan menerima string class tailwind, dan objek dalam bentuk array, kemudian array tersebut akan direkontruksi menjadi satu buah string utuh, setelah itu string utuh tersebut di merge oleh twMerge supaya tidak terjadi konflik.
+Props dari fungsi cn yaitu rest parameter inputs yang akan menerima string class tailwind, dan objek dalam bentuk array, kemudian array tersebut akan direkontruksi menjadi satu buah string utuh, setelah itu string utuh tersebut di merge oleh twMerge supaya tidak terjadi konflik.
 Silahkan perhatikan bagian kode pada Button.tsx
 
-```javascript
-<button {...props} className={cn(baseClass, whichVarian, props.className)}>
-   {isLoading ? <Loader2 className='animate-spin' /> : children}
-</button>
-```
-
-Kita tinggal gunakan komponen Button sesuai kebutuhan.
+Kita tinggal gunakan komponen Button sesuai kebutuhan. Berikut ini beberapa contoh variasi button yang dapat kita atur nilai propsnya.
 
 ```javascript
 import Button from '@/components/Button';
@@ -89,12 +84,13 @@ export default function Home() {
       <main className='max-w-xl flex flex-col gap-2 mx-auto mt-10 h-screen'>
          <Button variant='primary'>Primary Button</Button>
          <Button variant='secondary'>Secondary Button</Button>
-         <Button className='bg-green-600'>Default Button</Button>
+         <Button className='bg-green-600'>Costum Button</Button>
+         <Button>Default Button</Button>
          <Button isLoading>Loading Button</Button>
       </main>
    );
 }
 ```
 
-![komponen button nextjs](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704586480/blog.juhancoding.dev/class-dinamis_cqwsvo.png)
-Menurut saya cara ini lebih mudah dan clean. Semoga bermanfaat.
+![komponen button nextjs](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704630253/blog.juhancoding.dev/chrome-capture-2024-1-7_1_kurozw.gif)
+Kolaborasi twMerge dan clsx ini sangat membantu terutama untuk pembuatan komponen yang membutuhkan class dinamis yang komplek. Semoga bermanfaat.
