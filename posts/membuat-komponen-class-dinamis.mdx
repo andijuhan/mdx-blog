@@ -1,0 +1,100 @@
+---
+title: Cara membuat dynamic class component menggunakan twMerge & clsx
+date: 'january 7, 2024'
+description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+thumbnailUrl: '/images/Cara-membuat-dynamic-class-component.jpg'
+tags: ['tailwind', 'nextjs']
+---
+
+Sebelumnya saya sudah memposting tentang Cara Membuat Costumable Component di Nextjs menggunakan twMerge. Pada beberapa kasus yang lebih komplek menggunakan twMerge sajah mungkin agak sedikit repot, contohnya jika ada pengkondisian class. Untuk menyiasati masalah ini ada lagi satu liblary ringan bernama clsx, yaitu sebuah library yang digunakan untuk menggabungkan beberapa nilai atau kelas CSS menjadi satu string. Library ini umumnya digunakan dalam konteks pengembangan front-end, terutama pada proyek-proyek yang menggunakan React. clsx memungkinkan Anda membuat kelas-kelas CSS secara dinamis berdasarkan kondisi-kondisi tertentu.
+
+Saya akan buat contoh pada komponen Button yang memiliki dua buah props yaitu variant dan isLoading. Props varian memiliki dua pilihan nilai yaitu 'primary' dan 'secondary', sementara isLoading bisa bernilai true dan false.
+
+Install liblary clsx dan twMerge dengan perintah berikut :
+
+```npm
+npm i clsx tailwind-merge
+```
+
+Ini adalah script dari komponen Button.tsx
+
+```javascript
+'use client';
+import { cn } from '@/lib/utils';
+import { HTMLAttributes } from 'react';
+import { Loader2 } from 'lucide-react';
+
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+   children: React.ReactNode;
+   variant?: 'primary' | 'secondary';
+   isLoading?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({
+   children,
+   isLoading,
+   variant,
+   ...props
+}) => {
+   const baseClass =
+      'flex items-center justify-center px-4 py-2 min-w-[8.2rem] max-w-min rounded-md bg-gray-800 text-white font-semibold';
+
+   const whichVarian = {
+      'bg-blue-500': variant === 'primary',
+      'bg-violet-500': variant === 'secondary',
+   };
+
+   return (
+      <button
+         {...props}
+         className={cn(baseClass, whichVarian, props.className)}
+      >
+         {isLoading ? <Loader2 className='animate-spin' /> : children}
+      </button>
+   );
+};
+
+export default Button;
+```
+
+Supaya kode lebih bersih, saya pisahkan bagian class tailwind menjadi dua, yaitu baseClass yang bersisi class button default, dan whichVarian berisi objek dengan dua buah key property.
+Key property tersebut merupakan class tailwind dengan value sesuai kondisi variant (true / false). Gunakan baseClass, whichVarian, dan props.className sebagai argumen fungsi cn.
+Sebelumnya kita buat dulu fungsi cn di file utils.ts pada folder lib.
+
+```javascript
+import { twMerge } from 'tailwind-merge';
+import { clsx, ClassValue } from 'clsx';
+
+export const cn = (...inputs: ClassValue[]) => {
+   return twMerge(clsx(inputs));
+};
+```
+
+Props dari fungsi cn yaitu rest parameter input akan menerima string class tailwind, dan objek dalam bentuk array, kemudian array tersebut akan direkontruksi menjadi satu buah string utuh, setelah itu string utuh tersebut di merge oleh twMerge supaya tidak terjadi konflik.
+Silahkan perhatikan bagian kode pada Button.tsx
+
+```javascript
+<button {...props} className={cn(baseClass, whichVarian, props.className)}>
+   {isLoading ? <Loader2 className='animate-spin' /> : children}
+</button>
+```
+
+Kita tinggal gunakan komponen Button sesuai kebutuhan.
+
+```javascript
+import Button from '@/components/Button';
+
+export default function Home() {
+   return (
+      <main className='max-w-xl flex flex-col gap-2 mx-auto mt-10 h-screen'>
+         <Button variant='primary'>Primary Button</Button>
+         <Button variant='secondary'>Secondary Button</Button>
+         <Button className='bg-green-600'>Default Button</Button>
+         <Button isLoading>Loading Button</Button>
+      </main>
+   );
+}
+```
+
+![komponen button nextjs](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704586480/blog.juhancoding.dev/class-dinamis_cqwsvo.png)
+Menurut saya cara ini lebih mudah dan clean. Semoga bermanfaat.
