@@ -1,9 +1,9 @@
 ---
 title: Cara membuat dynamic class component menggunakan twMerge & clsx
-date: 'january 7, 2024'
+date: "january 7, 2024"
 description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-thumbnailUrl: '/images/Cara-membuat-dynamic-class-component.jpg'
-tags: ['tailwind', 'nextjs']
+thumbnailUrl: "/images/Cara-membuat-dynamic-class-component.jpg"
+tags: ["tailwind", "nextjs"]
 ---
 
 Sebelumnya saya sudah memposting tentang Cara Membuat Costumable Component di Nextjs menggunakan twMerge. Pada beberapa kasus yang lebih komplek menggunakan twMerge sajah mungkin agak sedikit repot, contohnya jika ada pengkondisian class. Untuk menyiasati masalah ini ada lagi satu liblary ringan bernama clsx, yaitu sebuah library yang digunakan untuk menggabungkan beberapa nilai atau kelas CSS menjadi satu string. Library ini umumnya digunakan dalam konteks pengembangan front-end, terutama pada proyek-proyek yang menggunakan React. clsx memungkinkan Anda membuat kelas-kelas CSS secara dinamis berdasarkan kondisi-kondisi tertentu.
@@ -72,23 +72,22 @@ export const cn = (...inputs: ClassValue[]) => {
 ```
 
 Props dari fungsi cn yaitu rest parameter inputs yang akan menerima string class tailwind, dan objek dalam bentuk array, kemudian array tersebut akan direkontruksi menjadi satu buah string utuh, setelah itu string utuh tersebut di merge oleh twMerge supaya tidak terjadi konflik.
-Silahkan perhatikan bagian kode pada Button.tsx
 
 Kita tinggal gunakan komponen Button sesuai kebutuhan. Berikut ini beberapa contoh variasi button yang dapat kita atur nilai propsnya.
 
 ```javascript
-import Button from '@/components/Button';
+import Button from "@/components/Button";
 
 export default function Home() {
-   return (
-      <main className='max-w-xl flex flex-col gap-2 mx-auto mt-10 h-screen'>
-         <Button variant='primary'>Primary Button</Button>
-         <Button variant='secondary'>Secondary Button</Button>
-         <Button className='bg-green-600'>Costum Button</Button>
-         <Button>Default Button</Button>
-         <Button isLoading>Loading Button</Button>
-      </main>
-   );
+  return (
+    <main className="mx-auto mt-10 flex h-screen max-w-xl flex-col gap-2">
+      <Button variant="primary">Primary Button</Button>
+      <Button variant="secondary">Secondary Button</Button>
+      <Button className="bg-green-600">Costum Button</Button>
+      <Button>Default Button</Button>
+      <Button isLoading>Loading Button</Button>
+    </main>
+  );
 }
 ```
 

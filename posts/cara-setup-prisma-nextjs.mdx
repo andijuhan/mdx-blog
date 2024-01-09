@@ -1,14 +1,18 @@
 ---
 title: Cara setup prisma mysql nextjs typescript
-date: 'january 6, 2024'
+date: "january 6, 2024"
 description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-thumbnailUrl: '/images/cara-setup-prisma.jpg'
-tags: ['prisma', 'nextjs']
+thumbnailUrl: "/images/cara-setup-prisma.jpg"
+tags: ["prisma", "nextjs"]
 ---
+
+## Apa itu prisma?
 
 Prisma adalah sebuah framework ORM (Object-Relational Mapping) untuk Node.js dan TypeScript yang menyediakan cara yang efisien dan deklaratif untuk berinteraksi dengan database. Dibangun di atas TypeScript, Prisma menghasilkan client database secara otomatis dari skema database yang didefinisikan, memungkinkan pengembang untuk melakukan operasi CRUD (Create, Read, Update, Delete) dengan sintaks yang jelas dan intuitif. Prisma menawarkan dukungan untuk berbagai database, termasuk PostgreSQL, MySQL, SQLite, dan SQL Server, serta menyediakan fitur-fitur seperti pengelolaan relasi, query bersarang, dan migrasi database. Prisma memanfaatkan teknologi generasi kode dan menyediakan pengalaman pengembangan yang nyaman dan aman dengan penanganan query yang statis, autentikasi dan otorisasi yang terintegrasi, dan kemampuan untuk mengelola skema database dengan mudah.
 
 Admin sendiri selalu menggunakan prisma untuk proyek-proyek nextjs karena sangat mudah. Namun admin kadang suka lupa cara setupnya, untuk itu disini admin membuat post Cara mudah setup prisma di nextjs dan typescript untuk memudahkan proses setup supaya gak searching sana sini lagi.
+
+## Instalasi prisma server
 
 Instal dulu liblary prisma dengan perintah berikut :
 
@@ -21,6 +25,8 @@ Selanjutnya lakukan inisialisasi prisma dengan perintah :
 ```npm
 npx prisma init
 ```
+
+## Konfigurasi prisma
 
 Perintah tersebut akan menghasilkan sebuah folder bernama prisma yang di dalamnya terdapat file schema.prisma.
 Modifikasi `datasource provider` pada file schema.prisma sesuai jenis database yang digunakan. Disini admin menggunakan Mysql.
@@ -37,6 +43,8 @@ Selanjutnya buka file .env dan rubah nilai `DATABASE_URL` menjadi seperti beriku
 ```npm
 DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"
 ```
+
+## Membuat schema model
 
 Tahap berikutnya adalah membuat data model. Sebuah model merepresentasikan tabel dan fieldnya di dalam database. Berikut ini contoh model untuk tabel Post :
 
@@ -61,6 +69,8 @@ Untuk melihat hasilnya dapat mengeceknya langsung di phpmyadmin atau buka prisma
 npx prisma studio
 ```
 
+## Instalasi prisma client
+
 Selanjutnya kita perlu menginstal prisma client supaya aplikasi nextjs bisa terkoneksi dengan prisma. Install prisma client dengan perintah berikut :
 
 ```npm
@@ -73,7 +83,9 @@ Berikutnya generate client dari schema prisma dengan perintah :
 npx prisma generate
 ```
 
-Prisma client sudah bisa digunakan untuk melakukan CRUD, namun masih ada langkah yang tidak kalah penting yaitu membuat satu instance Prisma yang akan diimpor di mana pun kita membutuhkannya. Alasannya adalah setiap kali kita inisialisasi Prisma client di suatu file, itu membuat koneksi ke database. Jika diinisialisasi di beberapa file, hal itu dapat menghabiskan batas koneksi database.
+## Optimasi koneksi prisma client
+
+Masih ada lagi satu langkah penting yaitu membuat satu instance Prisma yang akan diimpor di mana pun kita membutuhkannya. Alasannya adalah setiap kali kita inisialisasi Prisma client di suatu file, itu membuat koneksi ke database. Jika diinisialisasi di beberapa file, hal itu dapat menghabiskan batas koneksi database.
 
 Buat file prisma.ts di dalam folder lib. Tambahkan script berikut :
 
@@ -91,21 +103,23 @@ if (process.env.NODE_ENV !== 'production') globalThis.prisma = prismadb;
 export default prismadb;
 ```
 
+## Contoh fetch data menggunakan prisma
+
 Akhirnya Kita sudah bisa melakukan proses CRUD. Berikut ini contoh fetch data dari tabel post.
 
 ```javascript
-import prismadb from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import prismadb from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
 export const GET = async () => {
-   try {
-      const posts = await prismadb.post.findMany();
+  try {
+    const posts = await prismadb.post.findMany();
 
-      return NextResponse.json(posts);
-   } catch (error) {
-      console.log(error);
-      return new NextResponse('Something went wrong', { status: 500 });
-   }
+    return NextResponse.json(posts);
+  } catch (error) {
+    console.log(error);
+    return new NextResponse("Something went wrong", { status: 500 });
+  }
 };
 ```
 

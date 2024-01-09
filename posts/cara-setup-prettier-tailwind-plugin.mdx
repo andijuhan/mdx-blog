@@ -1,0 +1,64 @@
+---
+title: Cara setup plugin prettier tailwind, eslint di nextjs
+date: "january 10, 2024"
+description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+thumbnailUrl: "/images/prettier.jpg"
+tags: ["tailwind", "nextjs"]
+---
+
+Plugin prettier tailwind sangat direkomendasikan bagi pengguna tailwind, karena plugin ini dapat mengatasi masalah konsistensi penggunaan class tailwind.
+Jika sebelumnya anda masih asal-asalan menggunakan class tailwind, sebaiknya mulai dari sekarang ikuti [standar pengurutan class yang direkomendasikan oleh tailwind](https://tailwindcss.com/blog/automatic-class-sorting-with-prettier#how-classes-are-sorted). Namun anda tidak perlu repot untuk mengurutkan class-classnya secara manual, karena prettier tailwind dapat mengerjakannya secara otomatis.
+
+## Instalasi plugin prettier tailwind
+
+Ketikan perintah berikut :
+
+```npm
+pnpm i -D prettier eslint-config-prettier prettier-plugin-tailwindcss
+```
+
+Jangan lupa untuk menginstall ekstensi prettier dan eslint di VSCode anda.
+
+## Konfigurasi prettier dan eslint
+
+Buat file bernama `prettier.config.js` di root folder proyek nextjs anda.
+Paste kode berikut :
+
+```javascript
+module.exports = {
+  plugins: ["prettier-plugin-tailwindcss"],
+};
+```
+
+Buka file `.eslintrc.json`. Kemudian timpa dengan kode berikut :
+
+```javascript
+{
+  "extends": ["next/core-web-vitals", "prettier"]
+}
+```
+
+Konfigurasi `eslintrc.json` bertujuan supaya tidak terjadi konflik antara eslint dan prettier.
+
+## Konfigurasi VSCode
+
+Buka menu preferencess/settings. Ketikan `default format` pada kolom pencarian.
+![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704840612/blog.juhancoding.dev/default_format_yfgebm.png)
+Pastikan `Prettier - Code formatter` dipilih sebagai default formatter VSCode.
+
+## Tes format
+
+Selanjutnya kita coba tes pada kodingan kita.
+Ini adalah contoh class tailwind sebelum di format :
+
+![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704841723/blog.juhancoding.dev/tailwind_class_sort_oisfw7.png)
+
+Tekan Ctrl + S / save project, maka kode akan terformat otomatis. Urutan class tailwindnya berubah secara otomatis.
+
+![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704841896/blog.juhancoding.dev/tailwind_class_sort_result_snfd6l.png)
+
+Anda tidak usah pusing memikirkan pengururan classnya, yang pasti class tailwind tersebut sekarang sudah sesuai standar yang direkomendasikan tailwind.
+
+## Plugin tidak bekerja
+
+Jika plugin tidak bekerja / tidak terjadi perubahan, silahkan coba disable dan enable kan dulu ekstensi prettier.

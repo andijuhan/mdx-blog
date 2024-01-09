@@ -1,26 +1,26 @@
-'use client';
-import { categories } from '@/data';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+"use client";
+import { categories } from "@/data";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const CategoryMenu = () => {
-   const path = usePathname();
+  const path = usePathname();
 
-   return (
-      <div className='flex gap-2 mb-3 border-b dark:border-b-gray-700 pb-3 w-full overflow-x-scroll scrollbar-thin'>
-         {categories.map((category, index) => (
-            <Link
-               href={`/tag/${category.name}`}
-               className={`${
-                  path.includes(`/tag/${category.name}`) && 'border-gray-800'
-               } py-1 px-3 rounded-md border dark:border-gray-700 bg-white dark:bg-gray-600 min-w-max hover:border-gray-800 transition-colors duration-300 text-black dark:text-gray-100`}
-               key={index}
-            >
-               #{category.name}
-            </Link>
-         ))}
-      </div>
-   );
+  return (
+    <div className="mb-3 flex w-full gap-2 overflow-x-scroll border-b pb-3 scrollbar-thin dark:border-b-gray-700">
+      {categories.map((category, index) => (
+        <Link
+          href={`/tag/${category.name}`}
+          className={`${
+            path.includes(`/tag/${category.name}`) && "border-gray-800"
+          } min-w-max rounded-md border bg-white px-3 py-1 text-black transition-colors duration-300 hover:border-gray-800 dark:border-gray-700 dark:bg-gray-600 dark:text-gray-100`}
+          key={index}
+        >
+          #{category.name}
+        </Link>
+      ))}
+    </div>
+  );
 };
 
 export default CategoryMenu;

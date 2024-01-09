@@ -1,8 +1,8 @@
-import SkeletonPostContent from '@/components/skeleton-post-content';
-import React from 'react';
+import SkeletonPostContent from "@/components/skeleton-post-content";
+import React from "react";
 
 const Loading = () => {
-   return <SkeletonPostContent />;
+  return <SkeletonPostContent />;
 };
 
 export default Loading;

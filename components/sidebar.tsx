@@ -1,50 +1,50 @@
-'use client';
-import { menus } from '@/data';
-import Link from 'next/link';
-import React, { useEffect } from 'react';
-import DarkModeSwitcher from './dark-mode-switcher';
-import { useStoreSidebar } from '@/hooks/use-store-sidebar';
-import { usePathname } from 'next/navigation';
+"use client";
+import { menus } from "@/data";
+import Link from "next/link";
+import React, { useEffect } from "react";
+import DarkModeSwitcher from "./dark-mode-switcher";
+import { useStoreSidebar } from "@/hooks/use-store-sidebar";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
-   const { isOpen, close } = useStoreSidebar();
-   const pathName = usePathname();
+  const { isOpen, close } = useStoreSidebar();
+  const pathName = usePathname();
 
-   useEffect(() => {
-      close();
-   }, [pathName]);
+  useEffect(() => {
+    close();
+  }, [pathName]);
 
-   return (
-      <aside>
-         <div
-            className={`${
-               !isOpen && 'opacity-0 w-0 h-0'
-            } fixed inset-0 top-[60px] md:hidden max-h-screen z-[50] bg-black/50 backdrop-blur-sm transition-all duration-500`}
-            onClick={() => close()}
-         ></div>
-         <div
-            className={`${
-               !isOpen && 'transform -translate-x-full'
-            } fixed inset-0 top-[60px] z-[51] w-[256px] max-w-[256px] px-7 h-screen overflow-hidden bg-black transition-all duration-300 opacity-100`}
-         >
-            <DarkModeSwitcher className='my-7' />
-            <div className='flex flex-col gap-5 w-full'>
-               {menus.map((menu, index) => (
-                  <Link
-                     href={menu.path}
-                     key={index}
-                     passHref
-                     className='border-b border-gray-900 pb-2 w-full'
-                  >
-                     <span className='text-gray-100 dark:text-gray-300 hover:text-indigo-300 font-medium'>
-                        {menu.title}
-                     </span>
-                  </Link>
-               ))}
-            </div>
-         </div>
-      </aside>
-   );
+  return (
+    <aside>
+      <div
+        className={`${
+          !isOpen && "h-0 w-0 opacity-0"
+        } fixed inset-0 top-[60px] z-[50] max-h-screen bg-black/50 backdrop-blur-sm transition-all duration-500 md:hidden`}
+        onClick={() => close()}
+      ></div>
+      <div
+        className={`${
+          !isOpen && "-translate-x-full transform"
+        } fixed inset-0 top-[60px] z-[51] h-screen w-[256px] max-w-[256px] overflow-hidden bg-black px-7 opacity-100 transition-all duration-300`}
+      >
+        <DarkModeSwitcher className="my-7" />
+        <div className="flex w-full flex-col gap-5">
+          {menus.map((menu, index) => (
+            <Link
+              href={menu.path}
+              key={index}
+              passHref
+              className="w-full border-b border-gray-900 pb-2"
+            >
+              <span className="font-medium text-gray-100 hover:text-indigo-300 dark:text-gray-300">
+                {menu.title}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </aside>
+  );
 };
 
 export default Sidebar;

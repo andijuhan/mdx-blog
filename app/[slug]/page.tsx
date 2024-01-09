@@ -1,52 +1,50 @@
-import PostContent from '@/components/post-content';
-import Link from 'next/link';
-import { blogSetting } from '@/data';
-import FeaturedImagePost from '@/components/featured-image-post';
-import getContent from '@/actions/getContent';
+import PostContent from "@/components/post-content";
+import Link from "next/link";
+import { blogSetting } from "@/data";
+import FeaturedImagePost from "@/components/featured-image-post";
+import getContent from "@/actions/getContent";
 
 export async function generateMetadata({
-   params,
+  params,
 }: {
-   params: { slug: string };
+  params: { slug: string };
 }) {
-   // read route params then fetch data
-   const { data } = await getContent(params.slug);
+  // read route params then fetch data
+  const { data } = await getContent(params.slug);
 
-   // return an object
-   return {
-      title: data.title + ' | ' + blogSetting.title,
-      description: data.description,
-   };
+  // return an object
+  return {
+    title: data.title + " | " + blogSetting.title,
+    description: data.description,
+  };
 }
 
 const page = async ({ params }: { params: { slug: string } }) => {
-   const { data, mdxSource } = await getContent(params.slug);
+  const { data, mdxSource } = await getContent(params.slug);
 
-   return (
-      <article className='w-full rounded shadow-lg p-2 md:p-5 bg-gray-50 dark:bg-gray-700'>
-         <FeaturedImagePost data={data} />
-         <h1 className='text-2xl font-bold mb-3 capitalize'>{data.title}</h1>
-         <div className='mb-4 w-full flex overflow-x-scroll scrollbar-thin gap-4 border-b dark:border-b-gray-600 pb-2'>
-            <div className='min-w-max'>
-               📅{' '}
-               <span className='text-gray-500 dark:text-gray-300'>
-                  {data.date}
-               </span>
-            </div>
-            <div className='min-w-max'>
-               <span className='mr-2'>🏷</span>
-               {data.tags.map((tag, index) => (
-                  <Link href={`/tag/${tag}`} key={index} passHref>
-                     <span className='text-indigo-500 dark:text-indigo-300 hover:text-indigo-700 mr-2'>
-                        #{tag}
-                     </span>
-                  </Link>
-               ))}
-            </div>
-         </div>
-         <PostContent mdxSource={mdxSource} />
-      </article>
-   );
+  return (
+    <article className="w-full rounded bg-gray-50 p-2 shadow-lg md:p-5 dark:bg-gray-700">
+      <FeaturedImagePost data={data} />
+      <h1 className="mb-3 text-2xl font-bold capitalize">{data.title}</h1>
+      <div className="mb-4 flex w-full gap-4 overflow-x-scroll border-b pb-2 scrollbar-thin dark:border-b-gray-600">
+        <div className="min-w-max">
+          📅{" "}
+          <span className="text-gray-500 dark:text-gray-300">{data.date}</span>
+        </div>
+        <div className="min-w-max">
+          <span className="mr-2">🏷</span>
+          {data.tags.map((tag, index) => (
+            <Link href={`/tag/${tag}`} key={index} passHref>
+              <span className="mr-2 text-indigo-500 hover:text-indigo-700 dark:text-indigo-300">
+                #{tag}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <PostContent mdxSource={mdxSource} />
+    </article>
+  );
 };
 
 export default page;

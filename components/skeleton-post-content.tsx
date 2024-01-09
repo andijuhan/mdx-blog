@@ -1,41 +1,41 @@
-import { Image as CoverImage } from 'lucide-react';
+import { Image as CoverImage } from "lucide-react";
 
 const SkeletonPostContent = () => {
-   return (
-      <div className='w-full'>
-         <div className='w-full flex items-center justify-center h-[200px] sm:h-[400px] bg-gray-300 dark:bg-gray-700 dark:text-gray-500 text-gray-400 rounded mb-3 border dark:border-gray-700 animate-pulse'>
-            <CoverImage size={50} />
-         </div>
-         <div className='w-[90%] mb-4 h-7 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-         <div className='mb-4 w-full flex overflow-x-scroll scrollbar-thin gap-4 border-b dark:border-b-gray-700 pb-2'>
-            <div className='w-20 h-7 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-20 h-7 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-20 h-7 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-         </div>
-         <div className='flex flex-col gap-3'>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-full h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-            <div className='w-1/2 h-5 bg-gray-300 dark:bg-gray-700 rounded animate-pulse'></div>
-         </div>
+  return (
+    <div className="w-full">
+      <div className="mb-3 flex h-[200px] w-full animate-pulse items-center justify-center rounded border bg-gray-300 text-gray-400 sm:h-[400px] dark:border-gray-700 dark:bg-gray-700 dark:text-gray-500">
+        <CoverImage size={50} />
       </div>
-   );
+      <div className="mb-4 h-7 w-[90%] animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+      <div className="mb-4 flex w-full gap-4 overflow-x-scroll border-b pb-2 scrollbar-thin dark:border-b-gray-700">
+        <div className="h-7 w-20 animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-7 w-20 animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-7 w-20 animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+      </div>
+      <div className="flex flex-col gap-3">
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-full animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+        <div className="h-5 w-1/2 animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
+      </div>
+    </div>
+  );
 };
 
 export default SkeletonPostContent;

@@ -1,35 +1,35 @@
-'use client';
-import { Moon, Sun } from 'lucide-react';
-import { HTMLAttributes, useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
-import { twMerge } from 'tailwind-merge';
+"use client";
+import { Moon, Sun } from "lucide-react";
+import { HTMLAttributes, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { twMerge } from "tailwind-merge";
 
 interface DarkModeSwitcherProps extends HTMLAttributes<HTMLDivElement> {}
 
 const DarkModeSwitcher = (props: DarkModeSwitcherProps) => {
-   const { theme, setTheme } = useTheme();
-   const [isMounted, setIsMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
 
-   useEffect(() => {
-      setIsMounted(true);
-   }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-   if (!isMounted) {
-      return null;
-   }
+  if (!isMounted) {
+    return null;
+  }
 
-   return (
-      <div
-         {...props}
-         className={twMerge(
-            'text-white opacity-60 hover:opacity-95 transition-colors hover:animate-pulse duration-300 cursor-pointer',
-            props.className
-         )}
-      >
-         {theme === 'dark' && <Moon onClick={() => setTheme('light')} />}
-         {theme === 'light' && <Sun onClick={() => setTheme('dark')} />}
-      </div>
-   );
+  return (
+    <div
+      {...props}
+      className={twMerge(
+        "cursor-pointer text-white opacity-60 transition-colors duration-300 hover:animate-pulse hover:opacity-95",
+        props.className,
+      )}
+    >
+      {theme === "dark" && <Moon onClick={() => setTheme("light")} />}
+      {theme === "light" && <Sun onClick={() => setTheme("dark")} />}
+    </div>
+  );
 };
 
 export default DarkModeSwitcher;
