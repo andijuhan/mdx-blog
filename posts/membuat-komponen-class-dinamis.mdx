@@ -6,7 +6,7 @@ thumbnailUrl: "/images/Cara-membuat-dynamic-class-component.jpg"
 tags: ["tailwind", "nextjs"]
 ---
 
-## Kenapa Saya menggunakan clsx?
+## Kegunaan liblary clsx
 
 Sebelumnya saya sudah memposting tentang Cara Membuat Costumable Component di Nextjs menggunakan twMerge. Pada beberapa kasus yang lebih komplek menggunakan twMerge sajah mungkin agak sedikit repot, contohnya jika ada pengkondisian class. Untuk menyiasati masalah ini ada lagi satu liblary ringan bernama clsx, yaitu sebuah library yang digunakan untuk menggabungkan beberapa nilai atau kelas CSS menjadi satu string. Library ini umumnya digunakan dalam konteks pengembangan front-end, terutama pada proyek-proyek yang menggunakan React. clsx memungkinkan Anda membuat kelas-kelas CSS secara dinamis berdasarkan kondisi-kondisi tertentu.
 
@@ -61,8 +61,7 @@ const Button: React.FC<ButtonProps> = ({
 export default Button;
 ```
 
-Supaya kode lebih bersih, saya pisahkan bagian class tailwind menjadi dua, yaitu `baseClass` yang bersisi class button default, dan `whichVarian` berisi objek dengan dua buah key property.
-Key property tersebut merupakan class tailwind dengan value sesuai kondisi variant (true / false). Gunakan `baseClass`, `whichVarian`, dan `props.className` sebagai argumen fungsi `cn`.
+Supaya kode lebih bersih, saya pisahkan bagian class tailwind menjadi dua, yaitu `baseClass` yang bersisi class button default. Kemudian saya buat objek yang berisi key property string dari class tailwind, nilai property tersebut bertipe boolean dari kondisi `variant`. Selanjutnya gunakan `baseClass`, `whichVarian`, dan `props.className` sebagai argumen fungsi `cn`.
 
 Sebelumnya kita buat dulu fungsi cn di file `utils.ts` pada folder lib.
 

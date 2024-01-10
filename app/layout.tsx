@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-100 dark:bg-gray-800">
+      <body className="min-w-[350px] bg-gray-100 dark:bg-gray-800">
         <ThemeProvider attribute="class" defaultTheme="light">
           <header>
             <Nav />
