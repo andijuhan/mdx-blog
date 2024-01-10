@@ -21,7 +21,6 @@ export async function generateMetadata({
 
 const page = async ({ params }: { params: { slug: string } }) => {
   const { data, mdxSource } = await getContent(params.slug);
-  // tes
 
   return (
     <article className="w-full rounded bg-gray-50 p-2 shadow-lg md:p-5 dark:bg-gray-700">
