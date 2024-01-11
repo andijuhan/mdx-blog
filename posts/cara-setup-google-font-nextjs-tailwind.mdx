@@ -1,0 +1,111 @@
+---
+title: Cara setup google font nextjs tailwind
+date: "january 11, 2024"
+description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+thumbnailUrl: "/images/google-font.png"
+tags: ["tailwind", "nextjs"]
+---
+
+Dalam mengerjakan sebuah project kita harus menyesuaikan jenis font sesuai desain UI/UX. Dalam kasus kali ini saya akan mengerjakan proyek nextjs dengan style tailwind, untuk itu kita harus melakukan beberapa setup agar google font kita bisa terbaca di class tailwind.
+
+## Memilih google font
+
+Silahkan kunjungi website [google font](https://fonts.google.com/) dan cari jenis font yang ingin anda gunakan. Misalkan disini saya menggunakan `Montserrat`. Pilih style font misalkan thin, light, regular, bold, semibold, bold, dan extra bold.
+Klik bagian `@import` dan copy bagian kode yang di bungkus oleh tag `<style>`.
+
+![memilih google font](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704971811/blog.juhancoding.dev/memilih_google_font_wqp2jn.png)
+Selanjutnya buka file `global.css` dan paste kode `@import` tadi dibagian atas.
+
+## Setup global.css
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Selanjutnya buka file `tailwind.config.js`
+Tambahkan property `fontFamily` di dalam property `theme` berikut :
+
+## Setup tailwind.config.js
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+    },
+    //tambahkan font disini
+    fontFamily: {
+      primaryFont: ["Montserrat", "sans-serif"],
+    },
+  },
+  plugins: [require("tailwind-scrollbar")],
+};
+```
+
+Nama property `primaryFont` bisa diganti dengan nama property yang anda suka, misal `mainFont`. Value dari `primaryFont` disesuaikan dengan jenis font, yaitu `'Montserrat', sans-serif`.
+
+![font family](https://res.cloudinary.com/djlpcw7uf/image/upload/v1704972700/blog.juhancoding.dev/font-family_owcsbw.png)
+
+Sekarang kita bisa menggunakan `primaryFont` pada class tailwind.
+
+## Contoh penggunaan font
+
+```javascript
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className="font-primaryFont">
+        <div className="flex gap-5">
+          <Sidebar />
+          <main className="mx-auto w-full flex-1 py-4">{children}</main>
+        </div>
+      </body>
+    </html>
+  );
+}
+```
+
+## Menggunakan banyak jenis font
+
+Anda bisa menambahkan lebih dari font, urutan caranya sama seperti sebelumnya, yaitu menambahkan kode import font di `global.css`, kemudian mendefinisikan nama font di dalam property `fontFamily`.
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+    },
+    //contoh menggunakan 2 jenis font
+    fontFamily: {
+      primaryFont: ["Montserrat", "sans-serif"],
+      secondaryFont: ["Roboto", "sans-serif"],
+    },
+  },
+  plugins: [require("tailwind-scrollbar")],
+};
+```
+
+Mudah bukan.. Semoga bermanfaat.

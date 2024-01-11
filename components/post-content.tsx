@@ -1,6 +1,5 @@
 "use client";
 import { MDXRemote } from "next-mdx-remote";
-import Button from "@/components/button";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import { useEffect } from "react";
@@ -10,7 +9,7 @@ interface IPostContent {
 }
 
 const PostContent = ({ mdxSource }: IPostContent) => {
-  const components = { Button };
+  const components = {};
 
   useEffect(() => {
     const highlight = async () => {
