@@ -7,6 +7,7 @@ import CategoryMenu from "@/components/category-menu";
 import { blogSetting } from "@/data";
 import { ThemeProvider } from "@/providers/theme-provider";
 import Sidebar from "@/components/sidebar";
+import GoogleAnalytics from "@/components/google-analytics";
 
 export const metadata: Metadata = {
   title: blogSetting.title + " | " + blogSetting.description,
@@ -34,7 +35,9 @@ export default function RootLayout({
             <CategoryMenu />
             {children}
           </main>
-
+          {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+            <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+          ) : null}
           <Footer />
           <Sidebar />
         </ThemeProvider>
