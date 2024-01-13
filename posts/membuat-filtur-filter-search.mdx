@@ -1,0 +1,203 @@
+---
+title: Cara membuat fitur search filter di nextjs
+date: "january 13, 2024"
+description: Membuat komponen fitur search filter sederhana menggunakan server action nextjs pada contoh kasus search dan filter movies
+thumbnailUrl: "/images/urlSearchParam.png"
+tags: ["nextjs"]
+---
+
+Fitur filter akan sangat berguna untuk menampilkan data sesuai dengan keinginan pengguna, fitur ini banyak sekali digunakan pada halaman website. Kali ini saya akan membuat contoh sederhana yaitu fitur filter untuk menampilkan list movie berdasarkan kata kunci judul, pilihan genre, dan tahun.
+
+## Membuat komponen filter movies
+
+Pertama kita buat dulu sebuah komponen bernama `MoviesFilter` yang berisi sebuah form.
+
+```javascript
+const MoviesFilter = () => {
+  return (
+    <div>
+      <form action={filterMovies}>
+        <div className="space-y-4">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="q">Search</label>
+            <input
+              id="q"
+              name="q"
+              placeholder="Movie title"
+              className="rounded-md border p-2"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="genre">Genre</label>
+            <select id="genre" name="genre" className="rounded-md border p-2">
+              <option value="">All genre</option>
+              {genres.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="genre">year</label>
+            <select id="year" name="year" className="rounded-md border p-2">
+              <option value="">All year</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="submit"
+            className="w-full rounded-md bg-gray-800 px-4 py-2 font-medium text-gray-100"
+          >
+            Filter
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+```
+
+Form tersebut berisi elemen input, select, dan button submit. Jika kita perhatikan pada bagian action form mengacu pada fungsi `filterMovies`.
+
+## Membuat action server
+
+Selanjutnya kita akan memanfaatkan fitur action server dari Nextjs. Fitur ini memberikan kemampuan sebuah fungsi untuk di jalankan di sisi server. Saya akan membuat server action bernama `filterMovies`, scriptnya seperti berikut :
+
+```javascript
+const filterMovies = async (formData: FormData) => {
+   'use server';
+   //konversi form data menjadi objek javascript
+   const values = Object.fromEntries(formData.entries());
+
+   const { q, genre, year } = MovieFilterSchema.parse(values);
+
+   //membuat url search params
+   const searchParams = new URLSearchParams({
+      ...(q && { q: q.trim() }),
+      ...(genre && { genre }),
+      ...(year && { year }),
+   });
+
+   redirect(`/?${searchParams.toString()}`);
+};
+```
+
+### Penjelasan fungsi filterMovies
+
+Fungsi ini menerima parameter `formData` bertipe `FormData`, kemudian formData akan di konversi menjadi objek javascript ke dalam variabel `values`. Selanjutnya nilai `values` akan di validasi menggunakan zod supaya struktur datanya sesuai dengan `MovieFilterSchema`.
+
+```javascript
+//zod schema
+const MovieFilterSchema = z.object({
+  q: z.string().optional(),
+  genre: z.string().optional(),
+  year: z.string().optional(),
+});
+```
+
+Output dari validasi zod parse tersebut kita destructuring ke dalam objek `{q, genre, year}`. Selanjutnya kita akan membuat string `url search params` yang berguna untuk membangun string query dari parameter pencarian yang diteruskan ke URL. Ini adalah contoh dari url search param :
+`http://localhost:3000/?q=spiderman&genre=action&year=2023`
+
+fungsi `redirect` akan mengalihkan pengguna ke halaman url search param. Contohnya seperti gambar dibawah :
+
+![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705102457/blog.juhancoding.dev/search_komponen_pkgxbl.png)
+
+Pengguna mengetikan kata kunci film `terminator`, genre `action`, tahun `2020`, kemudian mengklik tombol submit, maka pengguna akan di alihkan ke halaman
+`http://localhost:3000/?q=terminator&genre=action&year=2020`.
+Url search param ini nantinya dapat dimanfaatkan untuk query ke database menggunakan prisma.
+
+Script lengkapnya :
+
+```javascript
+import { genres, years } from '@/lib/data';
+import { redirect } from 'next/navigation';
+import { z } from 'zod';
+
+const MovieFilterSchema = z.object({
+   q: z.string().optional(),
+   genre: z.string().optional(),
+   year: z.string().optional(),
+});
+
+const filterMovies = async (formData: FormData) => {
+   'use server';
+   //konversi form data menjadi objek javascript
+   const values = Object.fromEntries(formData.entries());
+
+   const { q, genre, year } = MovieFilterSchema.parse(values);
+
+   //membuat url search params
+   const searchParams = new URLSearchParams({
+      ...(q && { q: q.trim() }),
+      ...(genre && { genre }),
+      ...(year && { year }),
+   });
+
+   redirect(`/?${searchParams.toString()}`);
+};
+
+const MoviesFilter = () => {
+   return (
+      <div>
+         <form action={filterMovies}>
+            <div className='space-y-4'>
+               <div className='flex flex-col gap-2'>
+                  <label htmlFor='q'>Search</label>
+                  <input
+                     id='q'
+                     name='q'
+                     placeholder='Movie title'
+                     className='border p-2 rounded-md'
+                  />
+               </div>
+               <div className='flex flex-col gap-2'>
+                  <label htmlFor='genre'>Genre</label>
+                  <select
+                     id='genre'
+                     name='genre'
+                     className='border p-2 rounded-md'
+                  >
+                     <option value=''>All genre</option>
+                     {genres.map((genre) => (
+                        <option key={genre} value={genre}>
+                           {genre}
+                        </option>
+                     ))}
+                  </select>
+               </div>
+               <div className='flex flex-col gap-2'>
+                  <label htmlFor='genre'>year</label>
+                  <select
+                     id='year'
+                     name='year'
+                     className='border p-2 rounded-md'
+                  >
+                     <option value=''>All year</option>
+                     {years.map((year) => (
+                        <option key={year} value={year}>
+                           {year}
+                        </option>
+                     ))}
+                  </select>
+               </div>
+               <button
+                  type='submit'
+                  className='px-4 py-2 w-full font-medium text-gray-100 bg-gray-800 rounded-md'
+               >
+                  Filter
+               </button>
+            </div>
+         </form>
+      </div>
+   );
+};
+
+export default MoviesFilter;
+```
+
+Pada postingan selanjutnya saya akan menggunakan prisma untuk memfilter data di database sesuai dengan query dari `url search param`.
