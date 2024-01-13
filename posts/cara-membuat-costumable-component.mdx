@@ -10,11 +10,15 @@ Membuat costumable component atau komponen yang bisa di kostumisasi secara fleks
 
 Lagi-lagi pengguna tailwind mendapatkan berbagai kemudahan dalam proses pengembangan karena kali ini Saya akan memanfaatkan liblary bernama tailwind-merge. Liblary ini sangat bermanfaat untuk menghindari terjadinya konflik pada class tailwind, yaitu pada class di komponen dan class yang berasal dari props.
 
+## Instalasi package
+
 Silahkan install liblary tailwind-merge dengan perintah berikut :
 
 ```npm
 npm i tailwind-merge
 ```
+
+## Membuat komponen MyButton
 
 Ini adalah contoh costumable component bernama my-button.tsx.
 
@@ -43,6 +47,8 @@ const MyButton = ({ children, ...props }: MyButtonProps) => {
 
 export default MyButton;
 ```
+
+## Penjelasan komponen MyButton
 
 Pertama kita buat interface `MyButtonProps` yang mengekstensi `HTMLAttributes<HTMLButtonElement>` dengan tambahan properti children. Selanjutnya pada elemen button kita menggunakan `{...props}` untuk menyalin semua property yang diterima oleh `MyButton`, kemudian fungsi `twMerge` akan menggabungkian class bawaan komponen dengan class dari props.
 

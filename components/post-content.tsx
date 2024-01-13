@@ -18,8 +18,6 @@ const PostContent = ({ mdxSource }: IPostContent) => {
     highlight(); // <--- call the async function
   }, []);
 
-  console.log({ mdxSource });
-
   return (
     <div className="content tracking-wide dark:text-gray-200">
       <MDXRemote {...mdxSource} components={components} />

@@ -12,9 +12,13 @@ Sebagian pengembang mungkin masih beranggapan bahwa menerapkan fitur darkmode it
 Pada tulisan kali ini, admin akan berbagi tips mudah setup darkmode dengan memanfaatkan liblary bernama next-themes. Admin akan membuat contoh pada proyek nextjs versi 14.
 Silahkan install dulu liblarynya dengan perintah.
 
+## Instalasi package
+
 ```npm
 npm i next-themes
 ```
+
+## Konfigurasi talwind.config.ts
 
 Tambahkan property darkMode: 'class' pada file tailwind.config.ts
 
@@ -42,6 +46,8 @@ const config: Config = {
 export default config;
 ```
 
+## Setup ThemeProvider
+
 Selanjutnya pada file layout.tsx bungkus komponen-komponen yang ada di bawah body dengan komponen ThemeProvider.
 
 ```javascript
@@ -65,6 +71,8 @@ export default function RootLayout({
 ```
 
 Pada komponen ThemeProvider tersebut admin menggunakan nilai props attribute='class' untuk menyesuaikan dengan tailwind.config.js. Kemudian untuk nilai props defaultTheme dapat memilih dark, atau light.
+
+## Menggunakan hooks useTheme
 
 Terakhir kita tinggal panggil hook useTheme dan menerapkannya pada logic program.
 
