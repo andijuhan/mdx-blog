@@ -3,12 +3,13 @@ import Link from "next/link";
 import { blogSetting } from "@/data";
 import FeaturedImagePost from "@/components/featured-image-post";
 import getContent from "@/actions/getContent";
+import { Metadata } from "next";
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
-}) {
+}): Promise<Metadata> {
   // read route params then fetch data
   const { data } = await getContent(params.slug);
 
@@ -16,6 +17,23 @@ export async function generateMetadata({
   return {
     title: data.title + " | " + blogSetting.title,
     description: data.description,
+    metadataBase: new URL(
+      process.env.BASE_URL || "http://localhost:3000",
+      "http://localhost:3000",
+    ),
+    openGraph: {
+      title: data.title + " | " + blogSetting.title,
+      description: data.description,
+      images: [
+        {
+          url: `${process.env.BASE_URL}${data.thumbnailUrl}`,
+          width: 800,
+          height: 500,
+          alt: data.title,
+        },
+      ],
+      url: `${process.env.BASE_URL}/${params.slug}`,
+    },
   };
 }
 
