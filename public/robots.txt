@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://blog.juhancoding.dev
+
+# Sitemaps
+Sitemap: https://blog.juhancoding.dev/sitemap.xml
