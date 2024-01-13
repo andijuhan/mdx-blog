@@ -29,7 +29,9 @@ const page = async ({ params }: { params: { slug: string } }) => {
       <div className="mb-4 flex w-full gap-4 overflow-x-scroll border-b pb-2 scrollbar-thin dark:border-b-gray-600">
         <div className="min-w-max">
           📅{" "}
-          <span className="text-gray-500 dark:text-gray-300">{data.date}</span>
+          <span className="capitalize text-gray-500 dark:text-gray-300">
+            {data.date}
+          </span>
         </div>
         <div className="min-w-max">
           <span className="mr-2">🏷</span>

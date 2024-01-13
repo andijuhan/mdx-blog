@@ -31,7 +31,9 @@ const PostCard = ({ post }: IPostCard) => {
           <h2 className="line-clamp-2 text-xl font-semibold capitalize tracking-tight text-gray-800 transition-colors duration-300 group-hover:text-indigo-500 md:text-lg dark:text-gray-200 dark:group-hover:text-indigo-400">
             {post.title}
           </h2>
-          <span className="text-gray-700 dark:text-gray-300">{post.date}</span>
+          <span className="capitalize text-gray-700 dark:text-gray-300">
+            {post.date}
+          </span>
         </div>
       </div>
     </Link>
