@@ -100,14 +100,13 @@ const MovieFilterSchema = z.object({
 });
 ```
 
-Output dari validasi zod parse tersebut kita destructuring ke dalam objek `{q, genre, year}`. Selanjutnya kita akan membuat string `url search params` yang berguna untuk membangun string query dari parameter pencarian yang diteruskan ke URL. Ini adalah contoh dari url search param :
-`http://localhost:3000/?q=spiderman&genre=action&year=2023`
+Output dari validasi zod parse tersebut kita destructuring ke dalam objek `{q, genre, year}` yang akan menjadi nilai argument untuk instance `URLSearchParams`. Namun karena `q, genre, year`, bertipe `string | undefined` kita harus melakukan kondisional dulu (memastikan nilainya tidak undefined).
 
-fungsi `redirect` akan mengalihkan pengguna ke halaman url search param. Contohnya seperti gambar dibawah :
+searchParams kemudian di rubah kedalam bentuk string sebagai argument fungsi `redirect`.
 
 ![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705102457/blog.juhancoding.dev/search_komponen_pkgxbl.png)
 
-Pengguna mengetikan kata kunci film `terminator`, genre `action`, tahun `2020`, kemudian mengklik tombol submit, maka pengguna akan di alihkan ke halaman
+Misalkan pengguna mengetikan kata kunci film `terminator`, genre `action`, tahun `2020`, kemudian mengklik tombol submit, maka pengguna akan di alihkan ke halaman
 `http://localhost:3000/?q=terminator&genre=action&year=2020`.
 Url search param ini nantinya dapat dimanfaatkan untuk query ke database menggunakan prisma.
 
