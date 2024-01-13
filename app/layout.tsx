@@ -11,6 +11,9 @@ import Sidebar from "@/components/sidebar";
 export const metadata: Metadata = {
   title: blogSetting.title + " | " + blogSetting.description,
   description: blogSetting.description,
+  verification: {
+    google: "YlhSQT3f7gDtgKMhB3781x8arB0mkj8OCootpNImWhE",
+  },
 };
 
 export default function RootLayout({
