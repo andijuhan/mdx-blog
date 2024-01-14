@@ -106,8 +106,12 @@ searchParams kemudian di rubah kedalam bentuk string sebagai argument fungsi `re
 
 ![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705102457/blog.juhancoding.dev/search_komponen_pkgxbl.png)
 
-Misalkan pengguna mengetikan kata kunci film `terminator`, genre `action`, tahun `2020`, kemudian mengklik tombol submit, maka pengguna akan di alihkan ke halaman
-`http://localhost:3000/?q=terminator&genre=action&year=2020`.
+Misalkan pengguna mengetikan kata kunci film `terminator`, genre `action`, tahun `2020`, kemudian mengklik tombol submit, maka pengguna akan di alihkan ke halaman :
+
+```bash
+http://localhost:3000/?q=terminator&genre=action&year=2020
+```
+
 Url search param ini nantinya dapat dimanfaatkan untuk query ke database menggunakan prisma.
 
 Script lengkapnya :
