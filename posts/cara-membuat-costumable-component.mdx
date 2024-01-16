@@ -27,11 +27,9 @@ Ini adalah contoh costumable component bernama my-button.tsx.
 import { HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface MyButtonProps extends HTMLAttributes<HTMLButtonElement> {
-   children: React.ReactNode;
-}
+interface MyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const MyButton = ({ children, ...props }: MyButtonProps) => {
+const MyButton = ({ ...props }: MyButtonProps) => {
    return (
       <button
          {...props}
@@ -40,7 +38,7 @@ const MyButton = ({ children, ...props }: MyButtonProps) => {
             props.className
          )}
       >
-         {children}
+         {props.children}
       </button>
    );
 };
