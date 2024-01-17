@@ -131,6 +131,7 @@ const FormZod = () => {
 
    //fungsi untuk menghandel submit
    const onSubmit = async (data: TSignUpSchema) => {
+      console.log(data)
       //mengirimkan data form ke API
       const response = await fetch('/api/signup', {
          method: 'POST',
@@ -231,13 +232,13 @@ export default FormZod;
 
 ## Penjelasan kode
 
-Di dalam script komponen `FormZod` di atas, saya sisipkan komentar untuk memudahkan pemahaman.
+Di dalam script komponen `FormZod` ada bagian komentar untuk memudahkan pemahaman kode.
 
 ![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705498548/blog.juhancoding.dev/useform_tvobrb.png)
 
-Hook **`useForm()`** menerima type generik **`<TSignUpSchema>`** (type yang di konversi dari schema zod signUpSchema di file types.ts). Isi property **`resolver`** dengan **`zodResolver`** (library validasi zod schema untuk TypeScript). **`zodResolver`** menggunakan skema formulir dari `signUpSchema`.
+Hook **`useForm()`** menerima type generik **`<TSignUpSchema>`** (type yang di konversi dari schema zod signUpSchema di file types.ts). Property **`resolver`** di isi dengan **`zodResolver`** (library validasi zod schema untuk TypeScript), dan menggunakan skema formulir dari **`signUpSchema`**.
 
-Hook `useForm` didestructuring untuk menghasilkan method property **`register, handleSubmit, formState: { errors, isSubmitting }, reset`**, dan **`setError`**. Berikut ini fungsi dari masing-masing method properti tersebut :
+Hook `useForm` didestructuring untuk menghasilkan method property **`register, handleSubmit, errors, isSubmitting , reset`**, dan **`setError`**. Berikut ini fungsi dari masing-masing method properti tersebut :
 
 **`register`**: Fungsi ini digunakan untuk mendaftarkan suatu elemen formulir ke dalam state yang dikelola oleh useForm. Ini menghubungkan elemen formulir dengan state dan memungkinkan hook untuk melacak perubahan pada elemen tersebut.
 
@@ -276,7 +277,7 @@ if (responseData.errors) {
 reset();
 ```
 
-Di dalam fungsi **`onSubmit`**, ada bagian untuk menangani respon error dari API. Jika terjadi error karena kesalahan validasi di sisi server, maka harus mengirim pesan kesalahan secara manual dengan cara memanggil method **`setError`**. Konfigurasi `setError` dengan nama elemen form, karena pesan kesahalan berasal dari server maka propery `type` di isi dengan string `server`. Pada properti `message` di isi dengan pesan error dari server / API.
+Di dalam fungsi **`onSubmit`**, ada bagian untuk menangani respon error dari respon API. Jika terjadi error karena kesalahan validasi di sisi server, maka harus mengirim pesan kesalahan secara manual dengan cara memanggil method **`setError`**. Konfigurasi `setError` dengan nama elemen form, karena pesan kesahalan berasal dari server maka propery `type` di isi dengan string `server`. Pada properti `message` di isi dengan pesan error dari server / API.
 
 Potongan kode elemen form :
 
@@ -323,11 +324,17 @@ Potongan kode elemen form :
 
 Method **`handleSubmit`** akan di eksekusi ketika form di submit, kemudian akan memicu validasi data dan mengeksekusi callbak **`onSubmit`**.
 
+Fungsi `onSubmit` menerima parameter data yang merupakan data dari form berisi objek dengan property elemen form (email, password, confirmPassword). Ketika form di submit data form akan di olah di dalam fungsi `onSubmit`, seperti mengirim request post ke API dan mengelola respon dari API.
+
+Berikut ini adalah bentuk data yang masuk sebagai parameter `onSubmit` :
+
+!()[https://res.cloudinary.com/djlpcw7uf/image/upload/v1705532626/blog.juhancoding.dev/form_data_jrjn4t.png]
+
 Method **`register`** di dalam elemen input berfungsi untuk mendaftarkan setiap elemen form ke dalam state yang dikelola oleh useForm.
 
-Di bagian bawah elemen form input akan menampilkan pesan error dengan cara memanggil objek errors dari dari useForm. Contoh : **`errors.nama_elemen_form.message`** ,
+Di bagian bawah elemen form input ada kondisional untuk menampilkan pesan error dengan cara memanggil objek `errors` dari dari `useForm`. Contoh : **`errors.nama_elemen_form.message`** ,
 
-Terakhir pada elemen button, props disabled di isi dengan status boolean dari property `isSubmitting` useForm.
+Terakhir pada elemen button, props `disabled` di isi dengan status boolean dari property `isSubmitting` useForm.
 
 ![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705504602/blog.juhancoding.dev/validasi_form_rwjcab.png)
 
