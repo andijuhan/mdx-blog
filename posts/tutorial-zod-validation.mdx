@@ -1,0 +1,336 @@
+---
+title: Tutorial validasi form dengan zod di Nextjs
+date: "january 17, 2024"
+description: Membuat validasi form yang kuat di Nextjs menggunakan zod dan react hook form.
+thumbnailUrl: "/images/cara-validasi-form-dengan-zod.jpeg"
+tags: ["zod", "nextjs"]
+---
+
+## Mengenal Zod dan React hook form
+
+Validasi form memiliki banyak manfaat, baik itu dari sisi pengguna (user) maupun dari sisi pengembang (developer). Proses validasi dapat mencegah penginputan yang tidak valid, meningkatkan pengalaman pengguna, peningkatan keamangan, dan pemeliharaan yang lebih mudah. Salah satu liblary validasi form terbaik yang banyak digunakan yaitu zod. Zod memiliki banyak kelebihan diantaranya yaitu mudah digunakan, integrasi typescript, validasi di sisi frontend dan backend, dan validasi yang kuat.
+
+Untuk memahami cara kerja zod, saya akan membuat contoh sederhana yaitu validasi untuk login form dan mengintegrasikan zod dengan liblary react hook form untuk memudahkan manajemen state form.
+
+## Menginstall liblary
+
+```bash
+npm i zod react-hook-form @hookform/resolvers
+```
+
+## Membuat zod schema
+
+Elemen input form yang akan saya buat yaitu `email, password, dan confirmPassword`, untuk itu perlu membuat schema zod sesuai dengan elemen input form tersebut. Berikut kodenya :
+`/lib/types.ts`
+
+```javascript
+import { z } from 'zod';
+
+//regek untuk pola password harus minimal 1 huruf kapital, dan 1 angka
+const passwordRegex = /^(?=.*[A-Z])(?=.*\d)/;
+
+export const signUpSchema = z
+   .object({
+      email: z.string().email(),
+      password: z
+         .string()
+         .min(10, 'Password must be at least 10 characters')
+         .refine(
+            (value) => {
+               return passwordRegex.test(value);
+            },
+            {
+               message:
+                  'The password must have at least one capital letter and one number',
+            }
+         ),
+      confirmPassword: z.string(),
+   })
+   .refine((data) => data.password === data.confirmPassword, {
+      message: 'Password must match',
+      path: ['confirmPassword'],
+   });
+
+export type TSignUpSchema = z.infer<typeof signUpSchema>;
+```
+
+### Penjelasan kode
+
+Iinisialisasi schema `signUpSchema` yang berisi objek dengan property `email, password, dan confirmPassword`. Setiap properti memiliki rule validasi sesuai kebutuhan, contoh :
+
+```javascript
+email: z.string().email();
+```
+
+Artinya property email harus berupa string dengan bentuk email
+
+```javascript
+password: z
+         .string()
+         .min(10, 'Password must be at least 10 characters')
+         .refine(
+            (value) => {
+               return passwordRegex.test(value);
+            },
+            {
+               message:
+                  'The password must have at least one capital letter and one number',
+            }
+         ),
+```
+
+Artinya properti `password` berjenis string, minimal panjang karakter 10. Kemudian property `password` memanggil fungsi `refine` yang akan melakukan pengecekan apakah nilai input sesuai dengan pola `passwordRegex`. Jika false maka akan mengembalikan objek message berupa pesan kesalahan.
+
+```javascript
+confirmPassword: z.string();
+```
+
+Artinya property `confirmPassword` harus berjenis string
+
+```javascript
+.refine((data) => data.password === data.confirmPassword, {
+      message: 'Password must match',
+      path: ['confirmPassword'],
+   });
+```
+
+Terakhir, properti `object` memanggil `fungsi` refine yang berfungsi untuk mengecek apakah property `password` dan `confirmPassword` bernilai sama, jika false maka akan mengembalikan pesan kesalahan yang dikirim ke path `confirmPassword`.
+
+Jangan lupa untuk mengkonversi schema zod menjadi bentuk type dengan cara :
+
+```javascript
+export type TSignUpSchema = z.infer<typeof signUpSchema>;
+```
+
+Harap di ingat, kita memiliki schema zod `signUpSchema` dan type `TSignUpSchema` yang akan digunakan pada hook useForm()
+
+## Membuat komponen form
+
+Setelah membuat schema zod, selanjutnya mengaplikasikannya pada komponen form.
+
+Buat sebuah komponen bernama `FormZod`. Berikut ini adalah kode lengkap dari komponen `FormZod` :
+
+```javascript
+'use client';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TSignUpSchema, signUpSchema } from '@/lib/types';
+
+const FormZod = () => {
+   //destrukturing dari useForm
+   const {
+      register,
+      handleSubmit,
+      formState: { errors, isSubmitting },
+      reset,
+      setError,
+   } = useForm<TSignUpSchema>({
+      resolver: zodResolver(signUpSchema),
+   });
+
+   //fungsi untuk menghandel submit
+   const onSubmit = async (data: TSignUpSchema) => {
+      //mengirimkan data form ke API
+      const response = await fetch('/api/signup', {
+         method: 'POST',
+         body: JSON.stringify(data),
+         headers: {
+            'Content-Type': 'application/json',
+         },
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+         alert('Submitting form failed!');
+         return;
+      }
+      //bagian untuk menampilkan pesan error
+      if (responseData.errors) {
+         const errors = responseData.errors;
+
+         //mengatur error secara manual menggunakan setError dari useForm
+         //parameter berisi string nama elemen form, type server (karena error dari API)
+         //dan message dengan respon error dari API
+         if (errors.email) {
+            setError('email', {
+               type: 'server',
+               message: errors.email,
+            });
+         } else if (errors.password) {
+            setError('password', {
+               type: 'server',
+               message: errors.password,
+            });
+         } else if (errors.confirmPassword) {
+            setError('confirmPassword', {
+               type: 'server',
+               message: errors.confirmPassword,
+            });
+         } else {
+            alert('Something went wrong!');
+         }
+      }
+      //mengkosongkan form
+      reset();
+   };
+
+   return (
+      <form
+      // handleSubmit akan memicu validasi dan callbak onSubmit
+         onSubmit={handleSubmit(onSubmit)}
+         className='w-full max-w-xl'
+         noValidate
+      >
+         <div className='flex flex-col gap-y-4'>
+            <input
+            //mendaftarkan elemen form ke state useForm
+            //isi parameter sesuai nama elemen form
+               {...register('email')}
+               type='email'
+               placeholder='Email'
+               className='px-4 py-2 rounded-md border'
+            />
+            {errors.email && (
+               <p className='text-red-500'>{`${errors.email.message}`}</p>
+            )}
+            <input
+               {...register('password')}
+               type='password'
+               placeholder='Password'
+               className='px-4 py-2 rounded-md border'
+            />
+            {errors.password && (
+               <p className='text-red-500'>{`${errors.password.message}`}</p>
+            )}
+            <input
+               {...register('confirmPassword')}
+               type='password'
+               placeholder='Confirm password'
+               className='px-4 py-2 rounded-md border'
+            />
+            {errors.confirmPassword && (
+               <p className='text-red-500'>{`${errors.confirmPassword.message}`}</p>
+            )}
+            <button
+            //status disabled sesuai nilai dari isSubmitting useForm
+               disabled={isSubmitting}
+               type='submit'
+               className='bg-gray-800 disabled:bg-gray-600 text-gray-50 rounded-md py-2'
+            >
+               Submit
+            </button>
+         </div>
+      </form>
+   );
+};
+
+export default FormZod;
+```
+
+## Penjelasan kode
+
+Di dalam script komponen `FormZod` di atas, saya sisipkan komentar untuk memudahkan pemahaman.
+
+![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705498548/blog.juhancoding.dev/useform_tvobrb.png)
+
+Hook **`useForm()`** menerima type generik **`<TSignUpSchema>`** (type yang di konversi dari schema zod signUpSchema di file types.ts). Isi property **`resolver`** dengan **`zodResolver`** (library validasi zod schema untuk TypeScript). **`zodResolver`** menggunakan skema formulir dari `signUpSchema`.
+
+Hook `useForm` didestructuring untuk menghasilkan method property **`register, handleSubmit, formState: { errors, isSubmitting }, reset`**, dan **`setError`**. Berikut ini fungsi dari masing-masing method properti tersebut :
+
+**`register`**: Fungsi ini digunakan untuk mendaftarkan suatu elemen formulir ke dalam state yang dikelola oleh useForm. Ini menghubungkan elemen formulir dengan state dan memungkinkan hook untuk melacak perubahan pada elemen tersebut.
+
+**`handleSubmit`**: Fungsi ini digunakan untuk menangani pengiriman formulir. Saat formulir disubmit, fungsi ini akan dieksekusi.
+
+**`formState: { errors, isSubmitting }`**: Destructuring dari objek formState yang memberikan akses ke berbagai properti terkait dengan status formulir. errors akan berisi objek yang berisi kesalahan validasi, dan isSubmitting akan memberikan informasi apakah formulir sedang dalam proses pengiriman.
+
+**`reset`**: Fungsi ini digunakan untuk mereset nilai formulir ke nilai awal atau kosong.
+**`setError`**: Fungsi ini digunakan untuk menetapkan kesalahan pada suatu field formulir secara manual. Ini berguna ketika validasi tidak dapat dilakukan secara otomatis oleh useForm.
+
+```javascript
+//bagian untuk menampilkan pesan error dari respon API
+if (responseData.errors) {
+  const errors = responseData.errors;
+
+  if (errors.email) {
+    setError("email", {
+      type: "server",
+      message: errors.email,
+    });
+  } else if (errors.password) {
+    setError("password", {
+      type: "server",
+      message: errors.password,
+    });
+  } else if (errors.confirmPassword) {
+    setError("confirmPassword", {
+      type: "server",
+      message: errors.confirmPassword,
+    });
+  } else {
+    alert("Something went wrong!");
+  }
+}
+//mengkosongkan form
+reset();
+```
+
+Di dalam fungsi **`onSubmit`**, ada bagian untuk menangani respon error dari API. Jika terjadi error karena kesalahan validasi di sisi server, maka harus mengirim pesan kesalahan secara manual dengan cara memanggil method **`setError`**. Konfigurasi `setError` dengan nama elemen form, karena pesan kesahalan berasal dari server maka propery `type` di isi dengan string `server`. Pada properti `message` di isi dengan pesan error dari server / API.
+
+Potongan kode elemen form :
+
+```javascript
+<form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl" noValidate>
+  <div className="flex flex-col gap-y-4">
+    <input
+      {...register("email")}
+      type="email"
+      placeholder="Email"
+      className="rounded-md border px-4 py-2"
+    />
+    {errors.email && (
+      <p className="text-red-500">{`${errors.email.message}`}</p>
+    )}
+    <input
+      {...register("password")}
+      type="password"
+      placeholder="Password"
+      className="rounded-md border px-4 py-2"
+    />
+    {errors.password && (
+      <p className="text-red-500">{`${errors.password.message}`}</p>
+    )}
+    <input
+      {...register("confirmPassword")}
+      type="password"
+      placeholder="Confirm password"
+      className="rounded-md border px-4 py-2"
+    />
+    {errors.confirmPassword && (
+      <p className="text-red-500">{`${errors.confirmPassword.message}`}</p>
+    )}
+    <button
+      disabled={isSubmitting}
+      type="submit"
+      className="rounded-md bg-gray-800 py-2 text-gray-50 disabled:bg-gray-600"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+```
+
+Method **`handleSubmit`** akan di eksekusi ketika form di submit, kemudian akan memicu validasi data dan mengeksekusi callbak **`onSubmit`**.
+
+Method **`register`** di dalam elemen input berfungsi untuk mendaftarkan setiap elemen form ke dalam state yang dikelola oleh useForm.
+
+Di bagian bawah elemen form input akan menampilkan pesan error dengan cara memanggil objek errors dari dari useForm. Contoh : **`errors.nama_elemen_form.message`** ,
+
+Terakhir pada elemen button, props disabled di isi dengan status boolean dari property `isSubmitting` useForm.
+
+![](https://res.cloudinary.com/djlpcw7uf/image/upload/v1705504602/blog.juhancoding.dev/validasi_form_rwjcab.png)
+
+Jika kita mencoba memasukan data yang salah, maka akan muncul pesan kesalahan seperti gambar diatas.
+
+Anda dapat mempelajari contoh-contoh validasi menggunakan zod dan react hook form di repositori [react-hook-form-zod](https://github.com/andijuhan/react-hook-form-zod). Semoga bermanfaat.
