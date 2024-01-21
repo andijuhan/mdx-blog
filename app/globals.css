@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .content {
-  @apply prose-headings:mb-4 prose-h1:text-2xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-bold prose-h3:text-xl prose-h3:font-bold prose-h4:text-xl prose-h4:font-semibold prose-p:mb-4 prose-a:text-indigo-600 prose-a:underline prose-pre:mb-4 prose-pre:rounded prose-ol:list-inside prose-ol:list-decimal prose-ul:list-inside prose-ul:list-disc prose-img:mb-4 prose-img:max-w-full prose-img:rounded-md dark:prose-a:text-indigo-400;
+  @apply prose-h1:text-2xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-bold prose-h3:text-xl prose-h3:font-bold prose-h4:text-xl prose-h4:font-semibold  prose-a:text-indigo-600 prose-a:underline  prose-pre:rounded prose-ol:list-inside prose-ol:list-decimal prose-ul:list-inside prose-ul:list-disc prose-img:max-w-full prose-img:rounded-md dark:prose-a:text-indigo-400;
 }
