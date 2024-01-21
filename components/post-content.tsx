@@ -9,8 +9,6 @@ interface IPostContent {
 }
 
 const PostContent = ({ mdxSource }: IPostContent) => {
-  const components = {};
-
   useEffect(() => {
     const highlight = async () => {
       await Prism.highlightAll(); // <--- prepare Prism
