@@ -20,7 +20,12 @@ const PostContent = ({ mdxSource }: IPostContent) => {
 
   return (
     <div className="content w-full overflow-x-auto tracking-wide dark:text-gray-200">
-      <MDXRemote {...mdxSource} components={components} />
+      <MDXRemote
+        {...mdxSource}
+        components={{
+          a: (props) => <a target="_blank" rel="nofollow" {...props} />,
+        }}
+      />
     </div>
   );
 };
