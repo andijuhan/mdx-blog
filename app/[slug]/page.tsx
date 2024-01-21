@@ -5,6 +5,7 @@ import FeaturedImagePost from "@/components/featured-image-post";
 import getContent from "@/actions/getContent";
 import { Metadata } from "next";
 import { cache } from "react";
+import getPosts from "@/actions/getPosts";
 
 //memoize fetching with cache
 const getPostBySlug = cache(async (slug: string) => await getContent(slug));
@@ -39,6 +40,12 @@ export async function generateMetadata({
       url: `${process.env.BASE_URL}/${params.slug}`,
     },
   };
+}
+
+export async function generateStaticParams() {
+  const jobs = await getPosts({ page: 1, pageSize: 1000 });
+
+  return jobs.posts.map((post) => post.slug);
 }
 
 const page = async ({ params }: { params: { slug: string } }) => {
