@@ -4,6 +4,10 @@ import { blogSetting } from "@/data";
 import FeaturedImagePost from "@/components/featured-image-post";
 import getContent from "@/actions/getContent";
 import { Metadata } from "next";
+import { cache } from "react";
+
+//memoize fetching with cache
+const getPostBySlug = cache(async (slug: string) => await getContent(slug));
 
 export async function generateMetadata({
   params,
@@ -11,7 +15,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   // read route params then fetch data
-  const { data } = await getContent(params.slug);
+  const { data } = await getPostBySlug(params.slug);
 
   // return an object
   return {
@@ -38,7 +42,7 @@ export async function generateMetadata({
 }
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const { data, mdxSource } = await getContent(params.slug);
+  const { data, mdxSource } = await getPostBySlug(params.slug);
 
   return (
     <article className="w-full rounded bg-gray-50 p-2 shadow-lg md:p-5 dark:bg-gray-700">
