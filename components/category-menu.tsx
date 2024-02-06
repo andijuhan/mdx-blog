@@ -7,7 +7,7 @@ const CategoryMenu = () => {
   const path = usePathname();
 
   return (
-    <div className="mb-3 flex w-full gap-2 overflow-x-scroll border-b pb-3 scrollbar-thin dark:border-b-gray-700">
+    <div className="mb-3 flex w-full gap-2 overflow-x-auto border-b pb-3 scrollbar-thin dark:border-b-gray-700">
       {categories.map((category, index) => (
         <Link
           href={`/tag/${category.name}`}

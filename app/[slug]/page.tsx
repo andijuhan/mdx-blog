@@ -55,7 +55,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
     <article className="w-full rounded bg-gray-50 p-2 shadow-lg md:p-5 dark:bg-gray-700">
       <FeaturedImagePost data={data} />
       <h1 className="mb-3 text-2xl font-bold capitalize">{data.title}</h1>
-      <div className="mb-4 flex w-full gap-4 overflow-x-scroll border-b pb-2 scrollbar-thin dark:border-b-gray-600">
+      <div className="mb-4 flex w-full gap-4 overflow-x-auto border-b pb-2 scrollbar-thin dark:border-b-gray-600">
         <div className="min-w-max">
           📅{" "}
           <span className="capitalize text-gray-500 dark:text-gray-300">
