@@ -21,8 +21,8 @@ const PostCard = ({ post }: IPostCard) => {
             height={300}
             quality={75}
             alt={post.title}
-            className={`h-full w-full rounded border object-cover object-center transition-all duration-[1s] group-hover:brightness-90 dark:border-gray-700 ${
-              isImageReady ? "blur-0" : "blur-3xl"
+            className={`h-full w-full rounded border object-cover object-center transition-all duration-300 group-hover:brightness-90 dark:border-gray-700 ${
+              isImageReady ? "blur-0" : "blur-md"
             }`}
             onLoad={() => setIsImageReady(true)}
           />
